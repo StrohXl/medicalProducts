@@ -1,3 +1,7 @@
+@use '../mixins/mixinsflex.scss';
+
 .content_form_login{
-    height: calc(100vh - 70px);
+    height: calc(100vh - 125px);
+    @include mixinsflex.flex(center, center, column);
+    gap: 2rem;
 }

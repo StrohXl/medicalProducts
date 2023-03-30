@@ -9,7 +9,7 @@ export default function App({ Component, pageProps }) {
   return (
 <>
         {
-          router.asPath == '/login'?
+          router.asPath == '/login' || router.asPath == '/registerUser'?
           <Component {...pageProps} />
           :
         <Layout>
