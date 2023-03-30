@@ -1,29 +1,21 @@
 import React, { useState } from "react";
 import {
-  AppstoreOutlined,
-  MailOutlined,
-  SettingOutlined,
+  TagOutlined,
+  RestOutlined,
+  BookOutlined,
+  DownOutlined,
   UserOutlined,
+  ShoppingCartOutlined,
 } from "@ant-design/icons";
-import { Menu, Typography, Space, Button } from "antd";
+import { Menu, Typography, Tooltip, Space, Button } from "antd";
 import InputSearch from "./inputSearch";
+import Link from "next/link";
 const { Title } = Typography;
 const items = [
   {
-    label: "Navigation One",
-    key: "mail",
-    icon: <MailOutlined />,
-  },
-  {
-    label: "Navigation Two",
-    key: "app",
-    icon: <AppstoreOutlined />,
-    disabled: true,
-  },
-  {
-    label: "Navigation Three - Submenu",
-    key: "SubMenu",
-    icon: <SettingOutlined />,
+    label: <Space>Medicinas<DownOutlined  style={{fontSize: '10px'}} /></Space>,
+    key: 1,
+    icon: <RestOutlined />,
     children: [
       {
         type: "group",
@@ -56,12 +48,49 @@ const items = [
     ],
   },
   {
-    label: (
-      <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
-        Navigation Four - Link
-      </a>
-    ),
+    label: "Ofertas de la semana",
+    key: 2,
+    icon: <TagOutlined />,
+  },
+  {
+    label: <Space>Doctores <DownOutlined style={{fontSize: '10px'}}/></Space>,
+    key: 3,
+    icon: <UserOutlined />,
+    children: [
+      {
+        type: "group",
+        label: "Item 1",
+        children: [
+          {
+            label: "Option 1",
+            key: "setting:1",
+          },
+          {
+            label: "Option 2",
+            key: "setting:2",
+          },
+        ],
+      },
+      {
+        type: "group",
+        label: "Item 2",
+        children: [
+          {
+            label: "Option 3",
+            key: "setting:3",
+          },
+          {
+            label: "Option 4",
+            key: "setting:4",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    label: "Informacion",
     key: "alipay",
+    icon: <BookOutlined />
   },
 ];
 
@@ -75,15 +104,45 @@ const Nav = () => {
 
   return (
     <>
-      <Space size={"large"}>
-        <Title level={3} style={{ paddingTop: "5px" }}>
-          Medic Products
-        </Title>
-        <InputSearch />
-        <Button shape="circle" size="large" type="text" icon={<UserOutlined />} />
-      </Space>
+      <div
+        style={{
+          justifyContent: "space-between",
+          display: "flex",
+          paddingTop: "5px",
+        }}
+      >
+        <Space>
+          <Link href={'/'}>
+          <Title level={3}>Medic Products</Title>
+          </Link>
+          <InputSearch />
+        </Space>
+        <Space size="large">
+          <Link href={'/buy'}>
+          <Tooltip title="Comprar" >
+            <Button
+              shape="circle"
+              size="large"
+              type="default"
+              icon={<ShoppingCartOutlined />}
+            />
+          </Tooltip>
+          </Link>
+          <a href={'/login'}>
+          <Tooltip title="Ingresar">
+            <Button
+              shape="circle"
+              size="large"
+              type="default"
+              icon={<UserOutlined />}
+            />
+          </Tooltip>
+          </a>
+        </Space>
+      </div>
 
       <Menu
+        style={{ background: "#fff0,", borderBottom: "0" }}
         onClick={onClick}
         selectedKeys={[current]}
         mode="horizontal"
