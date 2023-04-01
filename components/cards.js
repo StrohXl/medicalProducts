@@ -1,4 +1,4 @@
-import { Row, Col, Card, Button, Typography, Space } from "antd";
+import { Row, Col, ConfigProvider, Button, Typography, Space } from "antd";
 import React from "react";
 const { Title } = Typography;
 import { ShoppingCartOutlined } from "@ant-design/icons";
@@ -84,7 +84,7 @@ const cards = () => {
     <Row justify={"space-between"} wrap gutter={[10, 20]}>
       {data.map((i) => {
         return (
-          <Col key={i.id} xs={12} md={10} lg={8} xl={4}  >
+          <Col key={i.id} xs={12} md={10} lg={8} xl={4}>
             <div
               style={{
                 border: "1px solid #ddd",
@@ -95,18 +95,34 @@ const cards = () => {
               }}
             >
               <img src={i.img} style={{ height: "150px", width: "100%" }} />
-              <Title level={5} >{i.title}</Title>
-
-              <Title color="primary" level={5}>BS. {i.price}</Title>
-
-              <Button
-                size="large"
-                type="primary"
-                style={{ width: "100%", lineHeight: "100%", display: 'flex', justifyContent: 'center', gap: '10px', alignItems: 'center' }}
+              <Title level={5}>{i.title}</Title>
+              <ConfigProvider
+                theme={{
+                  token: {
+                    colorPrimary: "#ad4bcd",
+                    colorText: '#ad4bcd'
+                  },
+                }}
               >
-                <ShoppingCartOutlined />
-                Anadir
-              </Button>
+                <Title color="primary" level={5}>
+                  BS. {i.price}
+                </Title>
+                <Button
+                  size="large"
+                  type="default"
+                  style={{
+                    width: "100%",
+                    lineHeight: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                    gap: "10px",
+                    alignItems: "center",
+                  }}
+                >
+                  <ShoppingCartOutlined />
+                  Anadir
+                </Button>
+              </ConfigProvider>
             </div>
           </Col>
         );
