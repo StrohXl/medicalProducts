@@ -18,7 +18,7 @@ const card2 = ({i}) => {
           theme={{
             token: {
               colorPrimary: "#ad4bcd",
-              colorText: '#ad4bcd'
+        
             },
           }}
         >

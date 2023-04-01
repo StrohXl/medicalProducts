@@ -18,18 +18,16 @@ const card1 = ({i}) => {
       <Title level={5}>{i.title}</Title>
       <ConfigProvider
         theme={{
-          token: {
-            colorPrimary: "#ad4bcd",
-            colorText: "#ad4bcd",
+          token: {  
           },
         }}
       >
-        <Title color="primary" level={5}>
+        <Title level={5}>
           BS. {i.price}
         </Title>
         <Button
           size="large"
-          type="default"
+          type="primary"
           style={{
             width: "100%",
             lineHeight: "100%",

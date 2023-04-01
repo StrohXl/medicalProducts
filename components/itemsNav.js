@@ -1,13 +1,9 @@
 import { Space } from "antd";
 import {
   TagOutlined,
-  RestOutlined,
   BookOutlined,
   DownOutlined,
-  UserOutlined,
   RightOutlined,
-  ShoppingCartOutlined,
-  MenuOutlined,
 } from "@ant-design/icons";
 import Icon from '@mdi/react';
 import {  mdiMedicationOutline, mdiBabyBottle  } from '@mdi/js';

@@ -22,7 +22,7 @@ export default function App({ Component, pageProps }) {
             <Component {...pageProps} />
           </Content>
           <Footer
-          style={{background: '#000', color: '#000516', height: '300px'}}
+          style={{background: '#fff', height: '300px'}}
           >footer</Footer>
         </Layout>
           
