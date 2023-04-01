@@ -12,15 +12,15 @@ export default function App({ Component, pageProps }) {
           router.asPath == '/login' || router.asPath == '/registerUser'?
           <Component {...pageProps} />
           :
-        <Layout>
+        <div>
           <header>
             <Nav />
           </header>
-          <Content>
+          <div>
             <Component {...pageProps} />
-          </Content>
+          </div>
           <Footer>footer</Footer>
-        </Layout>
+        </div>
         }
    
   

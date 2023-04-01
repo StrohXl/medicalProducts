@@ -4,3 +4,9 @@
     align-items: $align;
     flex-direction: $direction;
 }
+@mixin margin($width, $margin, $padding){
+    @media(min-width: $width){
+        margin: $margin;
+        padding: $padding;
+    }
+}

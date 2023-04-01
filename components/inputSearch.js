@@ -7,7 +7,7 @@ const inputSearch = () => {
   };
   return (
     <Search
-      style={{ width: "500px", marginLeft: "3rem", paddingBottom: "5px" }}
+      
       placeholder="Buscar medicina"
       onSearch={onSearch}
       enterButton

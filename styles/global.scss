@@ -1,6 +1,8 @@
 @use './modules/contentFormLogin.scss';
-
+@use './mixins/mixins.scss';
 header{
-    padding: .5rem 3rem;
+    @include mixins.margin(0, 0, 0 1rem);
+    @include mixins.margin(800px, 0, 0 2rem);
+    @include mixins.margin(1200px, 0, 0 3rem);
     background-color: #fff;
 }
