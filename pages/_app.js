@@ -18,10 +18,12 @@ export default function App({ Component, pageProps }) {
           <header>
             <Nav />
           </header>
-          <Content>
+          <Content className="main">
             <Component {...pageProps} />
           </Content>
-          <Footer>footer</Footer>
+          <Footer
+          style={{background: '#000', color: '#000516', height: '300px'}}
+          >footer</Footer>
         </Layout>
           
     

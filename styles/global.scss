@@ -16,7 +16,7 @@ header{
 
    
 }
-.hero_carousel{
+.main{
     @include mixins.margin(0, 0 , 0 1rem);
     @include mixins.margin(800px, '', 0 2rem);
     @include mixins.margin(1200px, '', 0 3rem);

@@ -1,7 +1,6 @@
-import { Row, Col, ConfigProvider, Button, Typography, Space } from "antd";
+import { Row, Col } from "antd";
 import React from "react";
-const { Title } = Typography;
-import { ShoppingCartOutlined } from "@ant-design/icons";
+import Card1 from "./cards/card1";
 const data = [
   {
     id: 1,
@@ -46,37 +45,37 @@ const data = [
     price: "80,14",
   },
   {
+    id: 8,
     title: "Acetaminofen",
     img: "https://www.farmago.com.ve/wp-content/uploads/2020/12/imagen5-01-30.png",
     price: "60,14",
   },
   {
+    id: 9,
     title: "Acetaminofen",
     img: "https://www.farmago.com.ve/wp-content/uploads/2020/12/imagen5-01-30.png",
     price: "60,14",
   },
   {
-    id: 6,
-    title: "Acetaminofen",
-    img: "https://www.farmago.com.ve/wp-content/uploads/2020/12/imagen5-01-30.png",
-    price: "60,14",
-  },
-  {
-    id: 7,
+    id: 10,
     title: "Atamel",
     img: "https://farma-valor.com/site/wp-content/uploads/2021/01/atemal-001.jpg",
     price: "80,14",
   },
   {
+    id: 11,
     title: "Acetaminofen",
     img: "https://www.farmago.com.ve/wp-content/uploads/2020/12/imagen5-01-30.png",
     price: "60,14",
   },
   {
-    title: "Acetaminofen",
-    img: "https://www.farmago.com.ve/wp-content/uploads/2020/12/imagen5-01-30.png",
-    price: "60,14",
+    id: 12,
+    title: "Atamel",
+    img: "https://farma-valor.com/site/wp-content/uploads/2021/01/atemal-001.jpg",
+    price: "80,14",
   },
+
+
 ];
 
 const cards = () => {
@@ -84,46 +83,8 @@ const cards = () => {
     <Row justify={"space-between"} wrap gutter={[10, 20]}>
       {data.map((i) => {
         return (
-          <Col key={i.id} xs={12} md={10} lg={8} xl={4}>
-            <div
-              style={{
-                border: "1px solid #ddd",
-                background: "#fff",
-                borderRadius: "10px",
-                height: "300px",
-                padding: "1rem 1rem",
-              }}
-            >
-              <img src={i.img} style={{ height: "150px", width: "100%" }} />
-              <Title level={5}>{i.title}</Title>
-              <ConfigProvider
-                theme={{
-                  token: {
-                    colorPrimary: "#ad4bcd",
-                    colorText: '#ad4bcd'
-                  },
-                }}
-              >
-                <Title color="primary" level={5}>
-                  BS. {i.price}
-                </Title>
-                <Button
-                  size="large"
-                  type="default"
-                  style={{
-                    width: "100%",
-                    lineHeight: "100%",
-                    display: "flex",
-                    justifyContent: "center",
-                    gap: "10px",
-                    alignItems: "center",
-                  }}
-                >
-                  <ShoppingCartOutlined />
-                  Anadir
-                </Button>
-              </ConfigProvider>
-            </div>
+          <Col key={i.id} xs={12} md={8} lg={6} xl={4}>
+            <Card1 i={i}/>
           </Col>
         );
       })}
