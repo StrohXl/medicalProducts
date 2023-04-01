@@ -1,8 +1,24 @@
 @use './modules/contentFormLogin.scss';
 @use './mixins/mixins.scss';
 header{
-    @include mixins.margin(0, 0, 0 1rem);
-    @include mixins.margin(800px, 0, 0 2rem);
-    @include mixins.margin(1200px, 0, 0 3rem);
+    @include mixins.margin(0, 0 0 1rem, 0 1rem);
+    @include mixins.margin(800px, '', 0 2rem);
+    @include mixins.margin(1200px, '', 0 3rem);
     background-color: #fff;
+}
+.content_carousel{
+    background-color: #ad4bcd;
+    display: flex !important;
+    @include mixins.heigth(0, 200px , '');
+    @include mixins.heigth(600px, 250px, '');
+    @include mixins.heigth(1200px, 300px, '');
+    @include mixins.heigth(1600px, 350px, '');
+
+   
+}
+.hero_carousel{
+    @include mixins.margin(0, 0 , 0 1rem);
+    @include mixins.margin(800px, '', 0 2rem);
+    @include mixins.margin(1200px, '', 0 3rem);
+    
 }

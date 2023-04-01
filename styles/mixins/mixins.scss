@@ -10,3 +10,9 @@
         padding: $padding;
     }
 }
+@mixin heigth($width, $height, $ancho){
+    @media(min-width: $width){
+        height: $height;
+        width: $ancho;
+    }
+}

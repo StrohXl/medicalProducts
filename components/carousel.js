@@ -1,41 +1,59 @@
 import React from "react";
-import { Carousel, Button } from "antd";
-import Carousel2 from "react-multi-carousel";
-import 'react-multi-carousel/lib/styles.css';
+import { Carousel, Col, Row, Typography } from "antd";
+import "react-multi-carousel/lib/styles.css";
 const carousel = () => {
   const onChange = (e) => {
     console.log(e);
   };
+  const { Title } = Typography;
   const urlImage = [
-    "https://pbs.twimg.com/media/ESgP6u7WoAAZLEy.png",
-    "https://st4.depositphotos.com/16318796/24452/i/600/depositphotos_244520302-stock-photo-happy-healthy-woman-smiling-buying.jpg",
-    "https://img.freepik.com/foto-gratis/vista-cerca-mano-farmaceutico-tomando-caja-medicina-estante-farmacia_342744-320.jpg?w=2000",
-    "https://img.freepik.com/fotos-premium/retrato-farmaceutico-hermoso-alegre-que-inclina-contador-drogueria_109710-1738.jpg",
+    {
+        img: "https://pbs.twimg.com/media/ESgP6u7WoAAZLEy.png",
+        title: 'Aprovecha nuestras Mejores ofertas'
+    },
+    {
+      img: "https://img.freepik.com/fotos-premium/retrato-farmaceutico-hermoso-alegre-que-inclina-contador-drogueria_109710-1738.jpg",
+      title: 'Lleve los mejores productos',
+    },
+    {
+      img: "https://st4.depositphotos.com/16318796/24452/i/600/depositphotos_244520302-stock-photo-happy-healthy-woman-smiling-buying.jpg",    
+      title: '10% de Descuento en Atamel',
+    },
+    {
+      img: "https://img.freepik.com/foto-gratis/vista-cerca-mano-farmaceutico-tomando-caja-medicina-estante-farmacia_342744-320.jpg?w=2000",
+      title: 'Confianza y Seguridad al comprar',
+    },
 
+    
   ];
   return (
     <>
       <Carousel
         pauseOnFocus={true}
         pauseOnHover={false}
-        autoplay
         prevArrow={true}
+        autoplay
+        speed={1000}
+        className="hero_carousel"
         nextArrow={true}
-        style={{
-          height: "350px",
-          padding: "0",
-          width: "100%",
-        }}
+
       >
         {urlImage.map((i) => {
           return (
-            <div>
-              <img src={i} style={{ width: "100%", height: "350px" }} />
-            </div>
+            <span className="content_carousel">
+              <div style={{ width: "60%", padding: '2rem 8rem 2rem 2rem', color: '#fff', fontSize: '1.5rem' }}>
+                <h1>{i.title}</h1>
+              </div>
+              <div style={{ width: "40%" }}>
+                <img
+                  src={i.img}
+                  style={{ width: "100%", height: '100%', borderTopLeftRadius: "15rem", borderBottomLeftRadius: '15rem' }}
+                />
+              </div>
+            </span>
           );
         })}
       </Carousel>
-
     </>
   );
 };
