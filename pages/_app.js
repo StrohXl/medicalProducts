@@ -1,7 +1,7 @@
 import "../styles/global.scss";
 import { Layout, ConfigProvider } from "antd";
 import "antd/dist/reset.css";
-import Nav from "<negocio>/components/nav";
+import Nav from "<negocio>/components/nav/nav";
 import { useRouter } from "next/router";
 const { Header, Content, Footer } = Layout;
 export default function App({ Component, pageProps }) {

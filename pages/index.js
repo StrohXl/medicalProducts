@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import Cabezera from '<negocio>/components/cabezera'
-
+import Contact from '<negocio>/components/contact'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
@@ -16,6 +16,7 @@ export default function Home() {
       </Head>
       <main>
         <Cabezera/>
+        <Contact/>
       </main>
     </>
   )

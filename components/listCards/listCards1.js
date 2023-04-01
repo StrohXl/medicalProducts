@@ -1,6 +1,6 @@
 import { Row, Col } from "antd";
 import React from "react";
-import Card1 from "./cards/card1";
+import Card1 from "../cards/card1";
 const data = [
   {
     id: 1,

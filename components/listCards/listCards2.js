@@ -1,7 +1,7 @@
 import { Col, Row } from "antd";
 import React from "react";
-import Card2 from "./cards/card2";
-import Card3 from "./cards/card3";
+import Card2 from "../cards/card2";
+import Card3 from "../cards/card3";
 const listCard2 = ({ data, xsprops, mdprops, lgprops, xlprops, alturaprop }) => {
     let altura = '250px'
     let xs = 6

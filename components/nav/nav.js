@@ -10,7 +10,7 @@ import {
   MenuOutlined,
 } from "@ant-design/icons";
 import { Menu, Typography, Tooltip, Space, Button, Row, Col } from "antd";
-import InputSearch from "./inputSearch";
+import InputSearch from "../inputSearch";
 import Link from "next/link";
 const { Title } = Typography;
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import Carousel from './carousel'
-import Cards from './listCards1';
-import Cards2 from './listCards2';
+import Cards2 from './listCards/listCards2';
 import { Typography, ConfigProvider } from 'antd';
 const {Title} = Typography
 const data = [
@@ -52,7 +51,6 @@ const cabezera = () => {
             <Carousel/>
             <div style={{padding: '2rem 0'}}>
                 <Cards2 data={data} />
-                
             </div>
         </>
     );
