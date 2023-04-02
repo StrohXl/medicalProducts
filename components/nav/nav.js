@@ -48,7 +48,7 @@ const Nav = () => {
         >
           <Space size="large">
             <Link href={"/buy"}>
-              <Tooltip title="Comprar" arrow={false} color="blue">
+              <Tooltip title="Comprar" arrow={false} >
                 <Button
                   shape="circle"
                   size="large"
@@ -58,7 +58,7 @@ const Nav = () => {
               </Tooltip>
             </Link>
             <a href={"/login"}>
-              <Tooltip title="Ingresar" arrow={false} color="blue" style={{paddingTop: '30px'}}>
+              <Tooltip title="Ingresar" arrow={false}  style={{paddingTop: '30px'}}>
                 <Button
                   shape="circle"
                   size="large"

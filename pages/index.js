@@ -1,10 +1,51 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
-import Cabezera from '<negocio>/components/cabezera'
+import Carousel from '../components/carousel'
+import ListCard2 from '<negocio>/components/listCards/listCards2'
 import Contact from '<negocio>/components/contact'
 const inter = Inter({ subsets: ['latin'] })
+const data = [
+  {
+    id: 1,
+    title: "Atamel",
+    img: "https://farma-valor.com/site/wp-content/uploads/2021/01/atemal-001.jpg",
+    price: "80,14",
+  },
+  {
+    id: 2,
+    title: "Acetaminofen",
+    img: "https://www.farmago.com.ve/wp-content/uploads/2020/12/imagen5-01-30.png",
+    price: "60,14",
+  },
+  {
+    id: 3,
+    title: "Atamel",
+    img: "https://farma-valor.com/site/wp-content/uploads/2021/01/atemal-001.jpg",
+    price: "80,14",
+  },
+  {
+    id: 4,
+    title: "Acetaminofen",
+    img: "https://www.farmago.com.ve/wp-content/uploads/2020/12/imagen5-01-30.png",
+    price: "60,14",
+  },
+  {
+    id: 5,
+    title: "Atamel",
+    img: "https://farma-valor.com/site/wp-content/uploads/2021/01/atemal-001.jpg",
+    price: "80,14",
+  },
+  {
+    id: 6,
+    title: "Acetaminofen",
+    img: "https://www.farmago.com.ve/wp-content/uploads/2020/12/imagen5-01-30.png",
+    price: "60,14",
+  },
+  
 
+
+];
 export default function Home() {
   return (
     <>
@@ -14,10 +55,13 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-        <Cabezera/>
+      <>
+      <Carousel/>
+            <div style={{padding: '2rem 0'}}>
+                <ListCard2 data={data} />
+            </div>
         <Contact/>
-      </main>
+      </>
     </>
   )
 }
