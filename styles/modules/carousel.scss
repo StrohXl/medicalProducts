@@ -1,0 +1,11 @@
+@use '../mixins/mixins.scss';
+.content_carousel{
+    background-color: #1890ff;
+    display: flex !important;
+    margin: 3rem 0 3rem;
+    @include mixins.heigth(0, 200px , '');
+    @include mixins.heigth(600px, 250px, '');
+    @include mixins.heigth(1200px, 350px, '');
+    @include mixins.heigth(1600px, 350px, '');
+   
+}

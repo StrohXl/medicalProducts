@@ -9,7 +9,7 @@ const listCard2 = ({ data, xsprops, mdprops, lgprops, xlprops, alturaprop }) => 
     let lg = 24
     let xl = 4
   return (
-    <Row gutter={[10, 20]}  >
+    <Row gutter={[10, 20]} className="margin"  >
       {data.map((i, index) => {
 
         index == 0?
@@ -49,13 +49,17 @@ const listCard2 = ({ data, xsprops, mdprops, lgprops, xlprops, alturaprop }) => 
         index == 3?
         md = 16:
         index == 4?
-        md = 12:
+        md = 24:
         index == 5?
         md = 12: 
+        index == 6?
+        md = 12:
+        index == 7?
+        md = 6: 
         index == 8?
         md = 6: 
         index == 9?
-        (md = 24, altura = '200px'):
+        (md = 12, altura = '300px'):
         ''
         index == 0?
         (xs = 24):

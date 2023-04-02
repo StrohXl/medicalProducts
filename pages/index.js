@@ -1,10 +1,13 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import Carousel from '../components/carousel'
-import ListCard2 from '<negocio>/components/listCards/listCards2'
-import Contact from '<negocio>/components/contact'
-const inter = Inter({ subsets: ['latin'] })
+import Head from "next/head";
+import Image from "next/image";
+import { Inter } from "next/font/google";
+import Carousel from "../components/carousel";
+import ListCard2 from "<negocio>/components/listCards/listCards2";
+import Contact from "<negocio>/components/contact";
+import Hero from "<negocio>/components/hero";
+import { Typography, theme } from "antd";
+const { Title } = Typography;
+const inter = Inter({ subsets: ["latin"] });
 const data = [
   {
     id: 1,
@@ -42,11 +45,34 @@ const data = [
     img: "https://www.farmago.com.ve/wp-content/uploads/2020/12/imagen5-01-30.png",
     price: "60,14",
   },
-  
-
+  {
+    id: 7,
+    title: "Atamel",
+    img: "https://farma-valor.com/site/wp-content/uploads/2021/01/atemal-001.jpg",
+    price: "80,14",
+  },
+  {
+    id: 8,
+    title: "Acetaminofen",
+    img: "https://www.farmago.com.ve/wp-content/uploads/2020/12/imagen5-01-30.png",
+    price: "60,14",
+  },
+  {
+    id: 9,
+    title: "Atamel",
+    img: "https://farma-valor.com/site/wp-content/uploads/2021/01/atemal-001.jpg",
+    price: "80,14",
+  },
+  {
+    id: 10,
+    title: "Acetaminofen",
+    img: "https://www.farmago.com.ve/wp-content/uploads/2020/12/imagen5-01-30.png",
+    price: "60,14",
+  },
 
 ];
 export default function Home() {
+  const { token } = theme.useToken();
   return (
     <>
       <Head>
@@ -56,12 +82,10 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <>
-      <Carousel/>
-            <div style={{padding: '2rem 0'}}>
-                <ListCard2 data={data} />
-            </div>
-        <Contact/>
+        <Carousel />
+        <ListCard2 data={data} />
+        <Contact />
       </>
     </>
-  )
+  );
 }

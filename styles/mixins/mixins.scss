@@ -16,3 +16,12 @@
         width: $ancho;
     }
 }
+@mixin position($width,$position, $top, $right, $bottom, $left){
+    @media(min-width: $width){
+    position: $position;
+     top: $top;
+     right: $right;
+     bottom: $bottom;
+     left: $left;
+        }
+}

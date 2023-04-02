@@ -18,7 +18,11 @@ export default function App({ Component, pageProps }) {
           token:{
             colorPrimary: '#1890ff',
             colorSecondary: '#ad4bcd',
+          },
+          components:{
+
           }
+  
         }}
         >
           <Layout>

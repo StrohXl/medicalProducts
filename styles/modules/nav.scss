@@ -1,0 +1,15 @@
+@use '../mixins/mixins.scss';
+
+.col_menu{
+    @include mixins.position(0, absolute , '', .5rem, '', '');
+    @include mixins.position(600px, '' , '',  1rem, '', '');
+    @include mixins.position(900px, '' , '',  2rem, '', '');
+    @include mixins.position(1200px, '' , '',  5rem, '', '');
+}
+
+.col_groupButtons{
+    @include mixins.position(0, absolute , '',  .5rem, '', '');
+    @include mixins.position(600px, '' , '',  1rem, '', '');
+    @include mixins.position(900px, '' , '',  2rem, '', '');
+    @include mixins.position(1200px, '' , '',  5rem, '', '');
+}

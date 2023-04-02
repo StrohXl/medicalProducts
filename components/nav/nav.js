@@ -37,13 +37,14 @@ const Nav = () => {
           <InputSearch />
         </Col>
         <Col
+        className="col_groupButtons"
           xs={0}
           md={4}
           style={{
             textAlign: "end",
             paddingTop: "4px",
             position: "absolute",
-            right: "3rem",
+  
           }}
         >
           <Space size="large">
@@ -52,7 +53,7 @@ const Nav = () => {
                 <Button
                   shape="circle"
                   size="large"
-                  type="primary"
+                  type="default"
                   icon={<ShoppingCartOutlined />}
                 />
               </Tooltip>
@@ -62,7 +63,7 @@ const Nav = () => {
                 <Button
                   shape="circle"
                   size="large"
-                  type="primary"
+                  type="default"
                   icon={<UserOutlined />}
                 />
               </Tooltip>
@@ -72,11 +73,11 @@ const Nav = () => {
         <Col
           md={0}
           xs={4}
+          className="col_menu"
           style={{
             textAlign: "end",
             paddingTop: "4px",
             position: "absolute",
-            right: "3rem",
           }}
         >
           <Button type="text" icon={<MenuOutlined />} />

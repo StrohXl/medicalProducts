@@ -8,7 +8,7 @@ const { Title, Paragraph } = Typography;
 const contact = () => {
   const { token } = theme.useToken();
   return (
-    <Row>
+    <Row style={{marginTop: '2rem'}}>
       <Col
         xs={24}
         lg={8}
