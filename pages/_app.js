@@ -2,6 +2,7 @@ import "../styles/global.scss";
 import { Layout, ConfigProvider } from "antd";
 import "antd/dist/reset.css";
 import Nav from "<negocio>/components/nav/nav";
+import Foter from "<negocio>/components/footer";
 import { useRouter } from "next/router";
 const { Header, Content, Footer } = Layout;
 export default function App({ Component, pageProps }) {
@@ -32,8 +33,8 @@ export default function App({ Component, pageProps }) {
             <Content className="main">
               <Component {...pageProps} />
             </Content>
-            <Footer style={{ background: "#fff", height: "300px" }}>
-              footer
+            <Footer style={{ background: "#fff",}}>
+              <Foter/>
             </Footer>
           </Layout>
         </ConfigProvider>
