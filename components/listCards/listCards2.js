@@ -28,6 +28,21 @@ const listCard2 = ({ data, xsprops, mdprops, lgprops, xlprops, alturaprop }) => 
         (lg= 24, altura = '200px'):
         ''
         index == 0?
+        xl= 8:
+        index == 1?
+        xl= 4:
+        index == 3?
+        xl= 8:
+        index == 4?
+        xl= 12:
+        index == 7?
+        xl= 6: 
+        index == 8?
+        xl= 6: 
+        index == 9?
+        (xl= 24, altura = '200px'):
+        ''
+        index == 0?
         md = 16:
         index == 1?
         md = 8:
