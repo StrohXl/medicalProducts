@@ -7,7 +7,7 @@ header{
     background-color: #fff;
 }
 .content_carousel{
-    background-color: #ad4bcd;
+    background-color: #1890ff;
     display: flex !important;
     @include mixins.heigth(0, 200px , '');
     @include mixins.heigth(600px, 250px, '');

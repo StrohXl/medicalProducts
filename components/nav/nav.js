@@ -52,7 +52,7 @@ const Nav = () => {
                 <Button
                   shape="circle"
                   size="large"
-                  type="default"
+                  type="primary"
                   icon={<ShoppingCartOutlined />}
                 />
               </Tooltip>
@@ -62,7 +62,7 @@ const Nav = () => {
                 <Button
                   shape="circle"
                   size="large"
-                  type="default"
+                  type="primary"
                   icon={<UserOutlined />}
                 />
               </Tooltip>

@@ -1,7 +1,8 @@
 import React from "react";
-import { Carousel, Col, Row, Typography } from "antd";
+import { Carousel, Col, Row, Typography,theme } from "antd";
 import "react-multi-carousel/lib/styles.css";
 const carousel = () => {
+  const {token} = theme.useToken()
   const onChange = (e) => {
     console.log(e);
   };
@@ -40,7 +41,7 @@ const carousel = () => {
       >
         {urlImage.map((i) => {
           return (
-            <span className="content_carousel">
+            <div className="content_carousel">
               <div style={{ width: "60%", padding: '2rem 8rem 2rem 2rem', color: '#fff', fontSize: '1.5rem' }}>
                 <h1>{i.title}</h1>
               </div>
@@ -50,7 +51,7 @@ const carousel = () => {
                   style={{ width: "100%", height: '100%', borderTopLeftRadius: "15rem", borderBottomLeftRadius: '15rem' }}
                 />
               </div>
-            </span>
+            </div>
           );
         })}
       </Carousel>

@@ -6,7 +6,8 @@ import { useRouter } from "next/router";
 const { Header, Content, Footer } = Layout;
 export default function App({ Component, pageProps }) {
   const router = useRouter();
-
+  const colorPrimary = '#1890ff'
+  const colorSecondary = '#ad4bcd'
   return (
     <>
       {router.asPath == "/login" || router.asPath == "/registerUser" ? (
