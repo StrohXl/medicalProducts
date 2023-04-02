@@ -1,12 +1,24 @@
 import React from "react";
-import { Row, Col, Typography, ConfigProvider, Space } from "antd";
+import { Row, Col, Typography, ConfigProvider, Space, theme } from "antd";
 import Icon from "@mdi/react";
-import { mdiCellphone, mdiMail } from "@mdi/js";
+import { mdiCellphone, mdiEmail } from "@mdi/js";
+import FormContact from "./forms/formContact";
+
 const { Title, Paragraph } = Typography;
 const contact = () => {
+  const { token } = theme.useToken();
   return (
-    <Row >
-      <Col xl={8} style={{ padding: "3rem 2rem 6rem", backgroundColor: "#ad4bcd" }}>
+    <Row>
+      <Col
+        xs={24}
+        lg={8}
+        style={{
+          padding: "3rem 2rem 8rem",
+          backgroundColor: token.colorSecondary,
+          borderTopLeftRadius: "4px",
+          borderBottomLeftRadius: "4px",
+        }}
+      >
         <ConfigProvider
           theme={{
             token: {
@@ -19,19 +31,31 @@ const contact = () => {
             Completa el formulario y nosotros nos comunicamos contigo en menos
             de 24 horas
           </Paragraph>
-          <Space size="large" style={{marginTop: '4rem'}}>
-            <Icon path={mdiCellphone} size={1} color="#fff" />
-            <Title level={3}>04126947694</Title>
-          </Space>
-          <Space size="large" style={{marginTop: '3.5rem'}}>
-            <Icon path={mdiMail} size={1} color="#fff" />
-            <Title level={3}>xaviermayora20@gmail.com</Title>
-          </Space>
+          <div>
+            <Space size="middle" style={{ marginTop: "3rem" }}>
+              <Icon path={mdiCellphone} size={1} color="#fff" />
+              <Title level={5}>04126947694</Title>
+            </Space>
+          </div>
+          <div>
+            <Space size="middle" style={{ marginTop: "1rem" }}>
+              <Icon path={mdiEmail} size={1} color="#fff" />
+              <Title level={5}>xaviermayora20@gmail.com</Title>
+            </Space>
+          </div>
         </ConfigProvider>
       </Col>
-      <Col xl={16}>
-
-        formulario
+      <Col
+        lg={16}
+        xs={24}
+        style={{
+          padding: "4rem 2rem 0",
+          background: "#fff",
+          borderTopRightRadius: "4px",
+          borderBottomRightRadius: "4px",
+        }}
+      >
+        <FormContact />
       </Col>
     </Row>
   );

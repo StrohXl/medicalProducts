@@ -8,28 +8,31 @@ export default function App({ Component, pageProps }) {
   const router = useRouter();
 
   return (
-<>
-        {
-          router.asPath == '/login' || router.asPath == '/registerUser'?
-          <Component {...pageProps} />
-          :
-        
-        <Layout>
-          <header>
-            <Nav />
-          </header>
-          <Content className="main">
-            <Component {...pageProps} />
-          </Content>
-          <Footer
-          style={{background: '#fff', height: '300px'}}
-          >footer</Footer>
-        </Layout>
-          
-    
-        }
-   
-  
-</>
+    <>
+      {router.asPath == "/login" || router.asPath == "/registerUser" ? (
+        <Component {...pageProps} />
+      ) : (
+        <ConfigProvider
+        theme={{
+          token:{
+            colorPrimary: '#1890ff',
+            colorSecondary: '#ad4bcd',
+          }
+        }}
+        >
+          <Layout>
+            <header>
+              <Nav />
+            </header>
+            <Content className="main">
+              <Component {...pageProps} />
+            </Content>
+            <Footer style={{ background: "#fff", height: "300px" }}>
+              footer
+            </Footer>
+          </Layout>
+        </ConfigProvider>
+      )}
+    </>
   );
 }
