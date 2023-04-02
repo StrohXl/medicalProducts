@@ -9,27 +9,58 @@ const listCard2 = ({ data, xsprops, mdprops, lgprops, xlprops, alturaprop }) => 
     let lg = 24
     let xl = 4
   return (
-    <Row gutter={[20]}  >
+    <Row gutter={[10, 20]}  >
       {data.map((i, index) => {
+
         index == 0?
-        xl = 8:
+        lg= 8:
         index == 1?
-        xl = 4:
+        lg= 4:
         index == 3?
-        xl = 8:
+        lg= 8:
         index == 4?
-        xl = 12:
+        lg= 12:
         index == 7?
-        xl = 6: 
+        lg= 6: 
         index == 8?
-        xl = 6: 
+        lg= 6: 
         index == 9?
-        (xl = 24, altura = '200px'):
+        (lg= 24, altura = '200px'):
+        ''
+        index == 0?
+        md = 16:
+        index == 1?
+        md = 8:
+        index == 3?
+        md = 16:
+        index == 4?
+        md = 12:
+        index == 5?
+        md = 12: 
+        index == 8?
+        md = 6: 
+        index == 9?
+        (md = 24, altura = '200px'):
+        ''
+        index == 0?
+        (xs = 24):
+        index == 1?
+        xs = 12:
+        index == 3?
+        xs = 24:
+        index == 4?
+        xs = 12:
+        index == 6?
+        xs = 24: 
+        index == 7?
+        xs = 12: 
+        index == 9?
+        (xs = 24, altura = '200px'):
         ''
         if(xl == 4 || xl == 6){
           return(
         
-        <Col key={i.id} xs={xs} md={md} lg={lg} xl={xl}>
+        <Col key={i.id} xs={xs} md={md} lg={lg} >
           <Card2 i={i}/>
        </Col>
 
@@ -37,7 +68,7 @@ const listCard2 = ({ data, xsprops, mdprops, lgprops, xlprops, alturaprop }) => 
         }
         else{
           return(
-          <Col key={i.id} xs={xs} md={md} lg={lg} xl={xl}>
+          <Col key={i.id} xs={xs} md={md} lg={lg} >
             <Card3 i={i} altura={altura}/>
           </Col>
           )
