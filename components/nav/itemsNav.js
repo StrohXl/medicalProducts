@@ -18,7 +18,7 @@ export const items = [
       </Space>
     ),
     key: 1,
-    icon: <Icon path={mdiMedicationOutline} color='#1677ff' size={0.65}/>,
+    icon: <Icon path={mdiMedicationOutline} color='#1472c9' size={0.65}/>,
     children: [
       {
         label: <Link href={'/medicamentos/Anticonceptivos'}>Anticonceptivos</Link>,
@@ -47,7 +47,7 @@ export const items = [
   {
     label: "Ofertas de la semana",
     key: 2,
-    icon: <TagOutlined  style={{color: '#1677ff'}}/>,
+    icon: <TagOutlined  style={{color: '#1472c9'}}/>,
   },
   {
     label: (
@@ -56,7 +56,7 @@ export const items = [
       </Space>
     ),
     key: 3,
-    icon: <Icon path={mdiBabyBottle} size={0.65} color='#1677ff' />,
+    icon: <Icon path={mdiBabyBottle} size={0.65} color='#1472c9' />,
     children: [
       {
         type: "group",
@@ -116,7 +116,7 @@ export const items = [
       </Space>
     ),
     key: 4,
-    icon: <Icon path={mdiBabyBottle} size={0.65} color='#1677ff' />,
+    icon: <Icon path={mdiBabyBottle} size={0.65} color='#1472c9' />,
     children: [
       {
         type: "group",
@@ -167,6 +167,6 @@ export const items = [
   {
     label: "Informacion",
     key: "5",
-    icon: <BookOutlined style={{color: '#1677ff'}} />,
+    icon: <BookOutlined style={{color: '#1472c9'}} />,
   },
 ];

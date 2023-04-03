@@ -16,7 +16,7 @@ const muestra = () => {
         }}
       >
         <Col span={24}>
-          <Title level={2}>Somos mas que una Farmacia</Title>
+          <Title level={2}>Llevamos la salud a su casa</Title>
         </Col>
         <Col md={8} xs={24}>
           <Icon path={mdiCartCheck} size={4} color={"#1472c9"} />
