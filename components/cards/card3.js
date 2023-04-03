@@ -21,7 +21,7 @@ const card3 = ({i, altura}) => {
             width: "40%",
             borderRadius: "4px",
             border: "1px solid #eee9",
-            background: "#fff",
+            background: "#fffe",
             height: "40%",
             padding: '1rem'
           }}

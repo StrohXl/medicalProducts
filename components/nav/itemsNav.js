@@ -21,19 +21,19 @@ export const items = [
     icon: <Icon path={mdiMedicationOutline} color='#1677ff' size={0.65}/>,
     children: [
       {
-        label: "Anticonceptivos",
+        label: <Link href={'/medicamentos/Anticonceptivos'}>Anticonceptivos</Link>,
         key: "setting:1",
       },
       {
-        label: "Antiparasitarios",
+        label: <Link href={'/medicamentos/Antiparasitarios'}>Antiparasitarios</Link>,
         key: "setting:2",
       },
       {
-        label: "Medicamentos Controlados",
+        label: <Link href={'/medicamentos/Medicamentos Controlados'}>Medicamentos Controlados</Link>,
         key: "setting:3",
       },
       {
-        label: "Terapias Respiratorias",
+        label: <Link href={'/medicamentos/Terapias Respiratorias'}>Terapias Respiratorias</Link>,
         key: "setting:4",
       },
       {
