@@ -1,20 +1,26 @@
 import React, { useState } from "react";
 import { items } from "./itemsNav";
 import {
-  TagOutlined,
-  RestOutlined,
-  BookOutlined,
-  DownOutlined,
   UserOutlined,
   ShoppingCartOutlined,
   MenuOutlined,
 } from "@ant-design/icons";
-import { Menu, Typography, Tooltip, Space, Button, Row, Col } from "antd";
+import {
+  Menu,
+  Typography,
+  Tooltip,
+  Space,
+  Button,
+  theme,
+  Row,
+  Col,
+} from "antd";
 import InputSearch from "../inputSearch";
 import Link from "next/link";
 const { Title } = Typography;
 
 const Nav = () => {
+  const { token } = theme.useToken();
   const [current, setCurrent] = useState("mail");
 
   const onClick = (e) => {
@@ -25,11 +31,12 @@ const Nav = () => {
 
   return (
     <>
-      <Row style={{ gap: "0 40px", padding: '10px 0 0' }}>
+      <Row style={{ gap: "0 40px", padding: "10px 0 0" }}>
         <Col xl={4}>
           <Link href={"/"}>
             <Title level={3}>
-              <span style={{ color: "#1677ff" }}>Medic</span>Products
+              <span style={{ color: "#1677ff" }}>Medic</span>
+              <span style={{ color: token.colorSecondary }}>Products</span>
             </Title>
           </Link>
         </Col>
@@ -37,19 +44,18 @@ const Nav = () => {
           <InputSearch />
         </Col>
         <Col
-        className="col_groupButtons"
+          className="col_groupButtons"
           xs={0}
           md={4}
           style={{
             textAlign: "end",
             paddingTop: "4px",
             position: "absolute",
-  
           }}
         >
           <Space size="large">
             <Link href={"/buy"}>
-              <Tooltip title="Comprar" arrow={false} >
+              <Tooltip title="Comprar" arrow={false}>
                 <Button
                   shape="circle"
                   size="large"
@@ -59,7 +65,11 @@ const Nav = () => {
               </Tooltip>
             </Link>
             <a href={"/login"}>
-              <Tooltip title="Ingresar" arrow={false}  style={{paddingTop: '30px'}}>
+              <Tooltip
+                title="Ingresar"
+                arrow={false}
+                style={{ paddingTop: "30px" }}
+              >
                 <Button
                   shape="circle"
                   size="large"

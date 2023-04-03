@@ -1,9 +1,14 @@
-import { ConfigProvider,Typography, Button } from "antd";
+import { ConfigProvider,Typography, Button, theme } from "antd";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import React from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
 const {Title} = Typography
 
 const card1 = ({i}) => {
+  const router = useRouter()
+  console.log(router)
+  const {token} = theme.useToken()
   return (
     <div
       style={{
@@ -25,21 +30,25 @@ const card1 = ({i}) => {
         <Title level={5}>
           BS. {i.price}
         </Title>
-        <Button
-          size="large"
-          type="primary"
-          style={{
-            width: "100%",
-            lineHeight: "100%",
-            display: "flex",
-            justifyContent: "center",
-            gap: "10px",
-            alignItems: "center",
-          }}
-        >
-          <ShoppingCartOutlined />
-          Anadir
-        </Button>
+     <ConfigProvider theme={{token:{}}}>
+         <Link href={`${router.asPath}/${i.title}`}>
+          <Button
+            size="large"
+            type="primary"
+            style={{
+              width: "100%",
+              lineHeight: "100%",
+              display: "flex",
+              justifyContent: "center",
+              gap: "10px",
+              alignItems: "center",
+            }}
+          >
+            <ShoppingCartOutlined />
+            Anadir
+          </Button>
+         </Link>
+     </ConfigProvider>
       </ConfigProvider>
     </div>
   );

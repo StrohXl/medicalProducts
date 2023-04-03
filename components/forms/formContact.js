@@ -126,7 +126,7 @@ const formContact = () => {
             </Form.Item>
           </Col>
         </Row>
-        <Form.Item style={{ marginTop: "9rem" }}>   
+        <Form.Item style={{ marginTop: "6rem" }}>   
         <ConfigProvider theme={{token:{colorPrimary: token.colorSecondary}}}>
 
            <Button

@@ -4,73 +4,11 @@ import { Inter } from "next/font/google";
 import Carousel from "../components/carousel";
 import ListCard2 from "<negocio>/components/listCards/listCards2";
 import Contact from "<negocio>/components/contact";
-import Hero from "<negocio>/components/hero";
+import {items} from '../components/listCards/itemsCards2'
 import { Typography, theme } from "antd";
 const { Title } = Typography;
 const inter = Inter({ subsets: ["latin"] });
-const data = [
-  {
-    id: 1,
-    title: "Atamel",
-    img: "https://farma-valor.com/site/wp-content/uploads/2021/01/atemal-001.jpg",
-    price: "80,14",
-  },
-  {
-    id: 2,
-    title: "Acetaminofen",
-    img: "https://www.farmago.com.ve/wp-content/uploads/2020/12/imagen5-01-30.png",
-    price: "60,14",
-  },
-  {
-    id: 3,
-    title: "Atamel",
-    img: "https://farma-valor.com/site/wp-content/uploads/2021/01/atemal-001.jpg",
-    price: "80,14",
-  },
-  {
-    id: 4,
-    title: "Acetaminofen",
-    img: "https://www.farmago.com.ve/wp-content/uploads/2020/12/imagen5-01-30.png",
-    price: "60,14",
-  },
-  {
-    id: 5,
-    title: "Atamel",
-    img: "https://farma-valor.com/site/wp-content/uploads/2021/01/atemal-001.jpg",
-    price: "80,14",
-  },
-  {
-    id: 6,
-    title: "Acetaminofen",
-    img: "https://www.farmago.com.ve/wp-content/uploads/2020/12/imagen5-01-30.png",
-    price: "60,14",
-  },
-  {
-    id: 7,
-    title: "Atamel",
-    img: "https://farma-valor.com/site/wp-content/uploads/2021/01/atemal-001.jpg",
-    price: "80,14",
-  },
-  {
-    id: 8,
-    title: "Acetaminofen",
-    img: "https://www.farmago.com.ve/wp-content/uploads/2020/12/imagen5-01-30.png",
-    price: "60,14",
-  },
-  {
-    id: 9,
-    title: "Atamel",
-    img: "https://farma-valor.com/site/wp-content/uploads/2021/01/atemal-001.jpg",
-    price: "80,14",
-  },
-  {
-    id: 10,
-    title: "Acetaminofen",
-    img: "https://www.farmago.com.ve/wp-content/uploads/2020/12/imagen5-01-30.png",
-    price: "60,14",
-  },
 
-];
 export default function Home() {
   const { token } = theme.useToken();
   return (
@@ -83,7 +21,7 @@ export default function Home() {
       </Head>
       <>
         <Carousel />
-        <ListCard2 data={data} />
+        <ListCard2 data={items} />
         <Contact />
       </>
     </>
