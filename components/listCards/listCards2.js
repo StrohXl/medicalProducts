@@ -76,7 +76,7 @@ const listCard2 = ({ data, xsprops, mdprops, lgprops, xlprops, alturaprop }) => 
         index == 9?
         (xs = 24, altura = '200px'):
         ''
-        if(xl == 4 || xl == 6){
+        if(xl == 4 || xl == 6  || md == 4 || md == 6 || lg == 4 || lg == 6 ){
           return(
         
         <Col key={i.id} xs={xs} md={md} lg={lg} >

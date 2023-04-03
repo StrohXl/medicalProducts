@@ -42,6 +42,7 @@ const contacto = [
 ];
 const services = ["Envios", "Consultas", "Compras", "Ventas"];
 const icons = [mdiTwitter, mdiFacebook, mdiInstagram, mdiYoutube];
+
 const footer = () => {
   const { token } = theme.useToken();
   return (
@@ -49,7 +50,7 @@ const footer = () => {
       <Col xs={24} md={24} lg={9}>
         <Link href={"/"}>
           <Title level={3}>
-            <span style={{ color: "#1677ff" }}>Medic</span>Products
+            <span style={{ color: "#1677ff" }}>Medic</span><span style={{color: token.colorSecondary}}>Products</span>
           </Title>
         </Link>
         <Paragraph>

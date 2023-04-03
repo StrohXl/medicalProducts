@@ -6,11 +6,13 @@ const card3 = ({i, altura}) => {
         <card
         style={{
           borderRadius: "4px",
-          border: "1px solid #eee",
           height: altura,
         }}
       >
         <img src={i.img} style={{ width: "100%", height: altura, borderRadius: "4px", }} />
+        {i.title == ''? '':
+        
+        
         <div
           style={{
             position: "absolute",
@@ -34,6 +36,7 @@ const card3 = ({i, altura}) => {
           <Title level={5}>{i.title}</Title>
           </ConfigProvider>
         </div>
+        }
       </card>
     );
 };

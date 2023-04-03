@@ -7,6 +7,7 @@ import {
 } from "@ant-design/icons";
 import Icon from '@mdi/react';
 import {  mdiMedicationOutline, mdiBabyBottle  } from '@mdi/js';
+import Link from "next/link";
 
 export const items = [
   {
@@ -36,7 +37,7 @@ export const items = [
         key: "setting:4",
       },
       {
-        label: <Space style={{justifyContent: 'space-between', width: '100%'}}>Ver mas <RightOutlined /></Space> ,
+        label: <Link href={'/medicamentos'}><Space style={{justifyContent: 'space-between', width: '100%'}}>Ver mas <RightOutlined /></Space></Link>,
         key: "setting:5",
 
       },
