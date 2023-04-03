@@ -22,23 +22,23 @@ export const items = [
     children: [
       {
         label: <Link href={'/medicamentos/Anticonceptivos'}>Anticonceptivos</Link>,
-        key: "setting:1",
+        key: "11",
       },
       {
         label: <Link href={'/medicamentos/Antiparasitarios'}>Antiparasitarios</Link>,
-        key: "setting:2",
+        key: "12",
       },
       {
         label: <Link href={'/medicamentos/Medicamentos Controlados'}>Medicamentos Controlados</Link>,
-        key: "setting:3",
+        key: "13",
       },
       {
         label: <Link href={'/medicamentos/Terapias Respiratorias'}>Terapias Respiratorias</Link>,
-        key: "setting:4",
+        key: "14",
       },
       {
         label: <Link href={'/medicamentos'}><Space style={{justifyContent: 'space-between', width: '100%'}}>Ver mas <RightOutlined /></Space></Link>,
-        key: "setting:5",
+        key: "15",
 
       },
 
@@ -60,29 +60,105 @@ export const items = [
     children: [
       {
         type: "group",
-        label: "Item 1",
+        label: "Alimentacion",
         children: [
           {
-            label: "Anticonceptivos",
-            key: '1sadf',
+            label: "Cereales",
+            key: '31',
           },
           {
-            label: "Antiparasitarios",
-            key: 'label',
+            label: "Compotas",
+            key: '32',
+          },
+          {
+            label: "Formulas Infantiles",
+            key: '33',
+          },
+        ],
+      },
+      {
+
+        type: "group ",
+        label: "Higiene",
+        children: [
+          {
+            label: "Champú",
+            key: "34",
+          },
+          {
+            label: "Cremas",
+            key: "35",
+          },
+          {
+            label: "Lociones",
+            key: "36",
+          },
+          {
+            label: "Pañales",
+            key: "37",
+          },
+          {
+            label: "Talcos",
+            key: "38",
+          },
+          {
+            label: "Toallas Húmedas",
+            key: "39",
+          },
+        ],
+      },
+    ],
+  },
+   {
+    label: (
+      <Space>
+        Salud <DownOutlined style={{ fontSize: "10px" }} />
+      </Space>
+    ),
+    key: 4,
+    icon: <Icon path={mdiBabyBottle} size={0.65} color='#1677ff' />,
+    children: [
+      {
+        type: "group",
+        label: "Primeros Auxilios",
+        children: [
+          {
+            label: "Adhesivos y Curitas",
+            key: '41',
+          },
+          {
+            label: "Algodón Gasas y Vendas",
+            key: '42',
+          },
+          {
+            label: "Analgésicos y Antinflamantorios",
+            key: '43',
+          },
+          {
+            label: "Antisépticos",
+            key: '44',
+          },
+          {
+            label: "Cicatrizantes",
+            key: '45',
+          },
+          {
+            label: "Material Descartable",
+            key: '46',
           },
         ],
       },
       {
         type: "group",
-        label: "Item 2",
+        label: "Salud Geriátrica",
         children: [
           {
-            label: "Option 3",
-            key: "setting:3",
+            label: "Higiene",
+            key: "46",
           },
           {
-            label: "Option 4",
-            key: "setting:4",
+            label: "Productos para la Incotinencia",
+            key: "47",
           },
         ],
       },
@@ -90,7 +166,7 @@ export const items = [
   },
   {
     label: "Informacion",
-    key: "alipay",
+    key: "5",
     icon: <BookOutlined style={{color: '#1677ff'}} />,
   },
 ];

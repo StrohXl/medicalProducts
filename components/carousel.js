@@ -35,7 +35,7 @@ const carousel = () => {
         prevArrow={true}
         autoplay
         speed={1000}
-        className="hero_carousel"
+        style={{marginTop: '2rem'}}
         nextArrow={true}
 
       >

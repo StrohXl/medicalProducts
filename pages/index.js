@@ -5,6 +5,7 @@ import Carousel from "../components/carousel";
 import ListCard2 from "<negocio>/components/listCards/listCards2";
 import Contact from "<negocio>/components/contact";
 import {items} from '../components/listCards/itemsCards2'
+import SectionPlus from '../components/sectionPlus'
 import { Typography, theme } from "antd";
 const { Title } = Typography;
 const inter = Inter({ subsets: ["latin"] });
@@ -21,8 +22,10 @@ export default function Home() {
       </Head>
       <>
         <Carousel />
-        <ListCard2 data={items} />
-        <Contact />
+  
+          <ListCard2 data={items} />
+          <SectionPlus/>
+          <Contact />
       </>
     </>
   );

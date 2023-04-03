@@ -17,6 +17,7 @@ import {
 } from "antd";
 import InputSearch from "../inputSearch";
 import Link from "next/link";
+import { ConfigProvider } from "antd";
 const { Title } = Typography;
 
 const Nav = () => {
@@ -31,13 +32,15 @@ const Nav = () => {
 
   return (
     <>
-      <Row style={{ gap: "0 40px", padding: "10px 0 0" }}>
-        <Col xl={4}>
+      <Row gutter={20} style={{padding: "5px 0 0" }}>
+        <Col xl={4.7}>
           <Link href={"/"}>
-            <Title level={3}>
-              <span style={{ color: "#1677ff" }}>Medic</span>
-              <span style={{ color: token.colorSecondary }}>Products</span>
-            </Title>
+ 
+              <Title level={3} style={{padding: "2px 0 0" }}>
+                <span style={{ color: "#1677ff", fontWeight: 'bold' }}>MEDIC</span>
+                <span style={{ color: token.colorSecondary }}>PRODUCTS  </span>
+              </Title>
+
           </Link>
         </Col>
         <Col xs={0} md={10} style={{ lineHeight: "100%", paddingTop: "5px" }}>
@@ -53,17 +56,6 @@ const Nav = () => {
             position: "absolute",
           }}
         >
-          <Space size="large">
-            <Link href={"/buy"}>
-              <Tooltip title="Comprar" arrow={false}>
-                <Button
-                  shape="circle"
-                  size="large"
-                  type="default"
-                  icon={<ShoppingCartOutlined />}
-                />
-              </Tooltip>
-            </Link>
             <a href={"/login"}>
               <Tooltip
                 title="Ingresar"
@@ -78,7 +70,7 @@ const Nav = () => {
                 />
               </Tooltip>
             </a>
-          </Space>
+       
         </Col>
         <Col
           md={0}
@@ -94,11 +86,12 @@ const Nav = () => {
         </Col>
         <Col md={24} xs={0}>
           <Menu
-            style={{ background: "#fff0,", borderBottom: "0" }}
+            className="menu"
             onClick={onClick}
             selectedKeys={[current]}
             mode="horizontal"
             items={items}
+
           />
         </Col>
       </Row>
