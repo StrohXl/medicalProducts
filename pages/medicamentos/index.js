@@ -4,7 +4,7 @@ import { Typography } from 'antd';
 const {Title} = Typography
 const medicamentos = () => {
     return (
-        <div>
+        <div className='margin'>
             <Title>
                 Medicamentos
             </Title>

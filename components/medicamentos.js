@@ -1,14 +1,14 @@
 export const medicamentos =[
     {
-        img: '',
+        img: 'https://www.biotech.com.ve/wp-content/uploads/2021/11/Lokarin-F-2.png',
         title: 'Antialérgicos',
     },
     {
-        img: '',
+        img: 'https://www.farmalisto.com.pe/18672/medgynol-caja-por-28-tabletas.jpg',
         title: 'Anticonceptivos',
     },
     {
-        img: '',
+        img: 'https://www.farmalisto.com.pe/6386-large_default/albendazol-200-mg-caja-con-100-tabletas-masticables.jpg',
         title: 'Antiparasitarios',
     },
     {

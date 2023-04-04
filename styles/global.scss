@@ -3,10 +3,11 @@
 @use './modules/carousel.scss';
 @use './modules/nav.scss';
 @use './modules/section-plus.scss';
+@use './modules/Cards.scss';
 header{
     @include mixins.margin(0, 0rem, 0 );
     @include mixins.margin(800px, '', 0 2rem);
-    @include mixins.margin(1200px, '', 0 5rem);
+    @include mixins.margin(1200px, '', 0 4rem);
     background-color: #fff;
     box-shadow: 0 1px 5px 0 #555
 }
@@ -15,8 +16,11 @@ header{
     @include mixins.margin(0, 0 , 0 .5rem 0);
     @include mixins.margin(600px, '', 0 1rem 0);
     @include mixins.margin(900px, '', 0 2rem 0);
-    @include mixins.margin(1200px, '', 0 5rem 0);
+    @include mixins.margin(1200px, '', 0 4rem 0);
 }
 footer{
     margin-top: 3rem;
+}
+.css-dev-only-do-not-override-12likxn{
+    background: '#000' !important;
 }

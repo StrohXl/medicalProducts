@@ -21,6 +21,9 @@ export default function App({ Component, pageProps }) {
             colorSecondary: '#ad4bcd',
           },
           components:{
+            Layout:{
+              colorBgBody:'#ebebeb'
+            }
 
           }
   
