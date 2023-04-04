@@ -1,6 +1,6 @@
 import { Col, Row } from 'antd';
 import React from 'react';
-import { medicamentos } from '../medicamentos';
+import { medicamentos } from '../items/medicamentos';
 import Card5 from '../cards/card5';
 import Link from 'next/link';
 const listCards3 = () => {

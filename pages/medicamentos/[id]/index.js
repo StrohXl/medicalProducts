@@ -7,7 +7,7 @@ const index = () => {
     const router =  useRouter()
     console.log(router)
     return (
-        <div>
+        <div className='margin'> 
             <Title>
                {router.query.id}
             </Title>

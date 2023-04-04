@@ -2,10 +2,14 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import Carousel from "../components/carousel";
-import ListCard2 from "<negocio>/components/listCards/listCards2";
+import Card3 from "<negocio>/components/cards/card3";
+import Card2 from "<negocio>/components/cards/card2";
 import Contact from "<negocio>/components/contact";
-import {items} from '../components/listCards/itemsCards2'
-import SectionPlus from '../components/sectionPlus'
+import { salud } from "../components/items/salud";
+import { mensajes } from "../components/items/mensajes";
+import { ofertas } from "../components/items/ofertas";
+import { bebe } from "../components/items/bebe";
+import SectionPlus from "../components/sectionPlus";
 import { Typography, theme } from "antd";
 const { Title } = Typography;
 const inter = Inter({ subsets: ["latin"] });
@@ -22,10 +26,12 @@ export default function Home() {
       </Head>
       <>
         <Carousel />
-  
-          <ListCard2 data={items} />
-          <SectionPlus/>
-          <Contact />
+        <Card3 title={""} data={mensajes} limite={3} />
+        <Card2 title={"Ofertas"} data={ofertas}  />
+        <Card3 title={"Bebes"} data={bebe} limite={1} />
+        <Card3 title={"Salud"} data={salud} limite={1} />
+        <SectionPlus />
+        <Contact />
       </>
     </>
   );

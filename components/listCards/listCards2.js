@@ -15,7 +15,7 @@ const listCard2 = ({ data }) => {
   let xl = 4;
   let titulo = "";
   return (
-    <Row gutter={[20, 20]} className={`margin  ${robot.className}`}>
+    <Row gutter={[20, 60]} className={`margin  ${robot.className}`}>
       {items.map((i, index) => {
         index == 0
           ? (xs = 24)
@@ -42,18 +42,10 @@ const listCard2 = ({ data }) => {
           ? (md = 12)
           : index == 6
           ? (md = 12)
-          : index == 7
-          ? (md = 6)
-          : index == 8
-          ? (md = 6)
           : index == 9
           ? ((md = 12), (altura = "300px"))
           : "";
         index == 0
-          ? (lg = 8)
-          : index == 1
-          ? (lg = 4)
-          : index == 3
           ? (lg = 8)
           : index == 4
           ? (lg = 12)
@@ -66,10 +58,6 @@ const listCard2 = ({ data }) => {
           : "";
         index == 0
           ? (xl = 8)
-          : index == 1
-          ? (xl = 4)
-          : index == 3
-          ? (xl = 8)
           : index == 4
           ? (xl = 12)
           : index == 7
@@ -80,32 +68,13 @@ const listCard2 = ({ data }) => {
           ? ((xl = 24), (altura = "200px"))
           : "";
 
-        if (xl == 4 || xl == 6 || md == 4 || md == 6 || lg == 4 || lg == 6) {
-          return (
-            <Col key={i.id} xs={xs} md={md} lg={lg}>
-              <Link href={`${i.path}`}>
-                <Card2 i={i} />
-              </Link>
-            </Col>
-          );
-        }
-        if (xl == 12 || md == 12 || lg == 12) {
-          return (
-            <Col key={i.id} xs={xs} md={md} lg={lg}>
-              <Link href={`${i.path}`}>
-                <Card3 i={i} altura={altura} title={i.title} />
-              </Link>
-            </Col>
-          );
-        } else {
-          return (
-            <Col key={i.id} xs={xs} md={md} lg={lg}>
-             <Link href={`${i.path}`}>
-               <Card4 i={i} altura={altura} />
-             </Link>
-            </Col>
-          );
-        }
+          return(
+            <div>
+              hola
+            </div>
+          )
+ 
+    
       })}
     </Row>
   );
