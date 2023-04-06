@@ -1,18 +1,20 @@
 import React from "react";
-import { Row, Col, Typography, Button } from "antd";
+import { Row, Col, Typography, Button, ConfigProvider, theme } from "antd";
 import { Inter, Lora } from "next/font/google";
-import { ConfigProvider } from "antd";
 const { Title, Text } = Typography;
 const inter = Inter({ subsets: ["latin"] });
 const robot = Lora({ weight: "600", style: "normal", subsets: ["latin"] });
 const card4 = ({ data, title, limite }) => {
+  const {token} = theme.useToken()
   let xl = 12
   return (
     <Row gutter={[20, 20]} className="margin">
       <Col span={24}>
-        <Title level={3}>
-          {title}
-        </Title>
+      <ConfigProvider theme={{token:{colorTextHeading: '#888'}}}>
+          <Title level={3}>
+            {title.toUpperCase()}
+          </Title>
+      </ConfigProvider>
       </Col>
       {data.map((i, index) =>{
         if(index <= limite ){

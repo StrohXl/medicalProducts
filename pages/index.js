@@ -1,9 +1,9 @@
 import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "next/font/google";
-import Carousel from "../components/carousel";
+import Carousel from "../components/carousels/carousel";
 import Card3 from "<negocio>/components/cards/card3";
-import Card2 from "<negocio>/components/cards/card2";
+import CarouselOfertas from "<negocio>/components/carousels/carouselOfertas";
 import Contact from "<negocio>/components/contact";
 import { salud } from "../components/items/salud";
 import { mensajes } from "../components/items/mensajes";
@@ -27,7 +27,7 @@ export default function Home() {
       <>
         <Carousel />
         <Card3 title={""} data={mensajes} limite={3} />
-        <Card2 title={"Ofertas"} data={ofertas}  />
+        <CarouselOfertas />
         <Card3 title={"Bebes"} data={bebe} limite={1} />
         <Card3 title={"Salud"} data={salud} limite={1} />
         <SectionPlus />

@@ -22,7 +22,7 @@ const card2 = ({ i, title, data }) => {
             }}
           >
             <img src={i.img} style={{ height: "125px", width: "100%" }} />
-            <Title level={5} style={{ textAlign: "center", width: "100%" }}>
+            <Title level={5}>
               {i.title}
             </Title>
             <ConfigProvider
@@ -35,7 +35,7 @@ const card2 = ({ i, title, data }) => {
               <ConfigProvider
                 theme={{ token: { colorText: token.colorSecondary } }}
               >
-                <Paragraph>En Oferta</Paragraph>
+                <Paragraph>$ 20</Paragraph>
               </ConfigProvider>
             </ConfigProvider>
           </div>

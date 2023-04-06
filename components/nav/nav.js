@@ -15,7 +15,7 @@ import {
   Row,
   Col,
 } from "antd";
-import InputSearch from "../inputSearch";
+import InputSearch from "./inputSearch";
 import Link from "next/link";
 import { ConfigProvider } from "antd";
 const { Title } = Typography;

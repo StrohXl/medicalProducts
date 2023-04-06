@@ -1,11 +1,11 @@
 import React from 'react';
 
-const buy = () => {
+const index = () => {
     return (
         <div>
-          shoping cart   
+            admin
         </div>
     );
 };
 
-export default buy; 
+export default index;
