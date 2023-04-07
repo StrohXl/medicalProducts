@@ -1,51 +1,34 @@
-import React from 'react';
-import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
-import { useRouter } from 'next/router';
-import { Menu } from 'antd';
+import React from "react";
+import { useRouter } from "next/router";
+import { Menu } from "antd";
+import Icon from "@mdi/react";
+import { mdiMicrosoft, mdiHome } from "@mdi/js";
 const menuSiderAdmin = () => {
-    const items =[
-        {
-            label: 'Medicamentos',
-            icon: <UserOutlined/>,
-            key: '/admin/medicamentos'
-        },
-        {
+  const router = useRouter();
 
-            label: 'Ofertas de la semana',
-            icon: <UserOutlined/>,
-            key: '/admin/ofertasDeLaSemana'
-        },
-        {
-  
-            label: 'Bebes',
-            icon: <UserOutlined/>,
-            key: '/admin/bebes'
-        },
-        {
-       
-            label: 'Salud',
-            icon: <UserOutlined/>,
-            key: '/admin/salud'
-        },
-        {
-
-            label: 'Informacion',
-            icon: <UserOutlined/>,
-            key: '/admin/informacion'
-        },
-    ]
-    const router = useRouter()
-    return (
-        <Menu
-        mode="inline"
-        style={{
-          height: '100%',
-          borderRight: 0,
-        }}
-        items={items}
-        onClick={({ key})=>router.push(key)}
-      />
-    );
+  const items = [
+    {
+      label: 'Inicio',
+      key: '/admin',
+      icon: <Icon size={1}  path={mdiHome}  />
+    },
+    {
+      label: 'Categorias',
+      key: '/admin/categorias',
+      icon: <Icon size={1}  path={mdiMicrosoft}  />
+    }
+  ]
+  return (
+    <Menu
+      mode="inline"
+      style={{
+        height: "100%",
+        borderRight: 0,
+      }}
+      items={items}
+      onClick={({ key }) => router.push(key)}
+    />
+  );
 };
 
 export default menuSiderAdmin;

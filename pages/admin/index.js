@@ -1,11 +1,11 @@
-import React from 'react';
 
 const index = () => {
-    return (
-        <div>
-            admin
-        </div>
-    );
+ 
+  return (
+    <div>
+      Bienvenido
+    </div>
+  );
 };
 
 export default index;

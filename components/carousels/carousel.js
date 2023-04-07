@@ -1,12 +1,7 @@
 import React from "react";
-import { Carousel, Col, Row, Typography,theme } from "antd";
+import { Carousel } from "antd";
 import "react-multi-carousel/lib/styles.css";
 const carousel = () => {
-  const {token} = theme.useToken()
-  const onChange = (e) => {
-    console.log(e);
-  };
-  const { Title } = Typography;
   const urlImage = [
     {
         img: "https://pbs.twimg.com/media/ESgP6u7WoAAZLEy.png",

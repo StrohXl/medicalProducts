@@ -7,7 +7,6 @@ const { Title } = Typography;
 
 const card1 = ({ data }) => {
   const router = useRouter();
-  console.log(router);
   const { token } = theme.useToken();
   return (
     <Row gutter={[20, 20]}> 

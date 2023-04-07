@@ -7,7 +7,7 @@ import {
   Col,
   ConfigProvider,
   notification,
-  theme
+  theme,
 } from "antd";
 
 const formContact = () => {
@@ -19,14 +19,11 @@ const formContact = () => {
     });
   };
 
-  const {token} = theme.useToken()
- 
+  const { token } = theme.useToken();
+
   const onFinish = (e) => {
     openNotification();
-    console.log(e);
   };
-
-
 
   return (
     <ConfigProvider
@@ -39,11 +36,7 @@ const formContact = () => {
         },
       }}
     >
-      <Form
-        name="control-ref"
-        layout="vertical"
-        onFinish={onFinish}
-      >
+      <Form name="control-ref" layout="vertical" onFinish={onFinish}>
         <Row gutter={[20, 20]}>
           <Col xl={12}>
             <Form.Item
@@ -126,19 +119,19 @@ const formContact = () => {
             </Form.Item>
           </Col>
         </Row>
-        <Form.Item style={{ marginTop: "6rem" }}>   
-        <ConfigProvider theme={{token:{colorPrimary: token.colorSecondary}}}>
-
-           <Button
-            
-             size="large"
-             type="primary"
-             htmlType="submit"
-             style={{ width: "200px"}}
-             >
-             Enviar Mensaje
-           </Button>
-               </ConfigProvider>
+        <Form.Item style={{ marginTop: "6rem" }}>
+          <ConfigProvider
+            theme={{ token: { colorPrimary: token.colorSecondary } }}
+          >
+            <Button
+              size="large"
+              type="primary"
+              htmlType="submit"
+              style={{ width: "200px" }}
+            >
+              Enviar Mensaje
+            </Button>
+          </ConfigProvider>
         </Form.Item>
       </Form>
     </ConfigProvider>

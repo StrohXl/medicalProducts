@@ -25,7 +25,6 @@ const Nav = () => {
   const [current, setCurrent] = useState("mail");
 
   const onClick = (e) => {
-    console.log("click ", e);
     setCurrent(e.key);
   };
   const CssCol = { lineHeigth: "100%" };
@@ -44,7 +43,7 @@ const Nav = () => {
           </Link>
         </Col>
         <Col xs={0} md={10} style={{ lineHeight: "100%", paddingTop: "5px" }}>
-          <InputSearch />
+          <InputSearch placeholder={'Buscar Medicina'} />
         </Col>
         <Col
           className="col_groupButtons"

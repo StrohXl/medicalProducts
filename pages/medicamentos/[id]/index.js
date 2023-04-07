@@ -6,7 +6,6 @@ import Card1 from '<negocio>/components/cards/card1';
 const {Title} = Typography
 const index = () => {
     const router =  useRouter()
-    console.log(router)
     return (
         <div className='margin'> 
             <Title>

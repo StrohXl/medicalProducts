@@ -6,7 +6,6 @@ import LayoutClient from "<negocio>/components/layouts/layout";
 export default function App({ Component, pageProps }) {
   const router = useRouter();
 
-  console.log(router);
   return (
     <>
       {router.asPath == "/login" || router.asPath == "/registerUser" ? (

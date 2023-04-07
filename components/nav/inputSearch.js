@@ -2,7 +2,7 @@ import React from "react";
 import { Input } from "antd";
 import { ConfigProvider } from "antd";
 const { Search } = Input;
-const inputSearch = () => {
+const inputSearch = ({placeholder}) => {
   const onSearch = (e) => {
     console.log(e);
   };
@@ -21,7 +21,7 @@ const inputSearch = () => {
         },
       }}
     >
-      <Search size="middle" placeholder="Buscar medicina" onSearch={onSearch} enterButton />
+      <Search size="middle" placeholder={placeholder} onSearch={onSearch} enterButton />
     </ConfigProvider>
   );
 };

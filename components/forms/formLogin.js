@@ -2,6 +2,7 @@ import React from "react";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input, Space } from "antd";
 import { useRouter } from "next/router";
+import Cookies from 'js-cookie'
 import Link from "next/link";
 import axios from "axios";
 
@@ -10,7 +11,8 @@ const formLogin = () => {
   const onFinish = async (form) => {
    if( form.username == "Admin" && form.password == "1234567890"){
     const {data: {token}} = await axios.post('http://localhost:8000/api/login', form)
-    console.log(token)
+    axios.defaults.headers.common = { 'Authorization': `Bearer ${token}` }
+    Cookies.set('token', token)
     router.push('/admin')
    }
    else{

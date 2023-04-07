@@ -1,6 +1,5 @@
 import React from "react";
 import { Typography, Layout } from "antd";
-import Link from "next/link";
 import FormLogin from "<negocio>/components/forms/formLogin";
 const { Header, Content, Footer } = Layout;
 const { Title } = Typography;
