@@ -1,6 +1,6 @@
 import { Layout, ConfigProvider, theme } from "antd";
 import Nav from "../nav/nav";
-import Foter from '../footer'
+import Foter from './footer'
 const { Content, Footer } = Layout;
 const LayoutClient=({Component, pageProps})=>{
     return(

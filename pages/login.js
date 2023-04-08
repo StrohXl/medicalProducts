@@ -1,6 +1,6 @@
 import React from "react";
 import { Typography, Layout } from "antd";
-import FormLogin from "<negocio>/components/forms/formLogin";
+import FormLogin from "<negocio>/components/admin/forms/formLogin";
 const { Header, Content, Footer } = Layout;
 const { Title } = Typography;
 const login = () => {

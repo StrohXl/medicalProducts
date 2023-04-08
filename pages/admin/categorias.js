@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Divider, Button, Typography, Row, Col, Tooltip } from "antd";
-import Modal from "../../components/modals/modal";
-import ButtonsTable from "<negocio>/components/tables/buttonsTable";
-import Table from "../../components/tables/table";
+import Modal from "../../components/admin/modal";
+import ButtonsTable from "<negocio>/components/admin/tables/buttonsTable";
+import Table from "../../components/admin/tables/table";
 import axios from "axios";
 const { Title } = Typography;
 const categorias = () => {

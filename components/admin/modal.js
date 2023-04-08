@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Modal, Form } from "antd";
-import FormCategorie from "../forms/formCategorie";
+import FormCategorie from "./forms/formCategorie";
 import axios from "axios";
 const modal = ({ isModalOpen, handleOk, handleCancel, title, data }) => {
   const [form] = Form.useForm();

@@ -3,7 +3,7 @@ import { Button, Tooltip, Space, Popconfirm } from "antd";
 import { mdiDelete, mdiFileEdit } from "@mdi/js";
 import Icon from "@mdi/react";
 import axios from "axios";
-import Modal from "../modals/modal";
+import Modal from "../modal";
 const buttonsTable = ({ id, Actualizar }) => {
   //VARIABLES DE ESTADO
   const [isModalOpen, setIsModalOpen] = useState(false);

@@ -1,6 +1,6 @@
 import { Button } from "antd";
 import React from "react";
-import Table from "<negocio>/components/tables/table";
+import Table from "<negocio>/components/admin/tables/table";
 import { useState } from "react";
 import { Space } from "antd";
 import { Avatar } from "antd";

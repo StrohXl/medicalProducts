@@ -2,7 +2,7 @@ import React from "react";
 import { Row, Col, Typography, ConfigProvider, Space, theme } from "antd";
 import Icon from "@mdi/react";
 import { mdiCellphone, mdiEmail } from "@mdi/js";
-import FormContact from "./forms/formContact";
+import FormContact from "../admin/forms/formContact";
 
 const { Title, Paragraph } = Typography;
 const contact = () => {
