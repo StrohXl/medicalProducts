@@ -1,27 +1,41 @@
 import { useEffect, useState } from "react";
 import { Modal, Form } from "antd";
 import FormCategorie from "./forms/formCategorie";
+import { Create, Edit, Error } from "./notifications";
 import axios from "axios";
-const modal = ({ isModalOpen, handleOk, handleCancel, title, data }) => {
+const modal = ({
+  isOpenModal,
+  handleOk,
+  handleCancel,
+  titleModal,
+  value,
+  endPoint,
+  titlePopConfirm,
+}) => {
   const [form] = Form.useForm();
   const Url = "http://localhost:8000/api";
-  const EndPoint = "/categories/";
   const Guardar = async (values) => {
-    if (data == null) {
+    if (value == null) {
       try {
-        await axios.post(`${Url}${EndPoint}`, values);
+        await axios.post(`${Url}${endPoint}`, values);
         handleOk();
+        Create(titlePopConfirm);
       } catch (error) {
-        console.log(error);
+        error.response.status == 400
+          ? Error("El nombre debe de ser unico")
+          : console.log(error);
       }
     } else {
       try {
-        await axios.put(`${Url}${EndPoint}${data.id}`, values);
+        await axios.put(`${Url}${endPoint}${value.id}`, values);
+        Edit(titlePopConfirm);
+        handleOk();
       } catch (error) {
-        console.log(error);
+        error.response.status == 400
+          ? Error("El nombre debe de ser unico")
+          : console.log(error);
       }
     }
-    handleOk();
   };
   const onOk = async () => {
     form.validateFields().then((values) => {
@@ -29,19 +43,18 @@ const modal = ({ isModalOpen, handleOk, handleCancel, title, data }) => {
     });
   };
   useEffect(() => {
-    if (isModalOpen) {
-      if (data == null) {
+      if (value == null) {
         form.resetFields();
       } else {
-        console.log(data);
         form.resetFields();
-        form.setFieldValue(data);
+        form.setFieldValue(value);
       }
-    }
-  }, [isModalOpen]);
+
+  }, [isOpenModal]);
+  
   return (
-    <Modal title={title} open={isModalOpen} onOk={onOk} onCancel={handleCancel}>
-      <FormCategorie data={{ ...data }} form={form} />
+    <Modal title={titleModal} open={isOpenModal} onOk={onOk} onCancel={handleCancel}>
+      <FormCategorie data={{ ...value }} form={form} />
     </Modal>
   );
 };

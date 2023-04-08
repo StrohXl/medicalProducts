@@ -1,6 +1,4 @@
 import { Form, Input } from "antd";
-import { useEffect, useState } from "react";
-
 const formCategorie = ({ form, data, onChange}) => {
   return (
     <Form

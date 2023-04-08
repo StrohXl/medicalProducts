@@ -3,8 +3,15 @@ import { Button, Tooltip, Space, Popconfirm } from "antd";
 import { mdiDelete, mdiFileEdit } from "@mdi/js";
 import Icon from "@mdi/react";
 import axios from "axios";
-import Modal from "../modal";
-const buttonsTable = ({ id, Actualizar }) => {
+import ModalForm from "../modal";
+import { Delete } from "../notifications";
+const buttonsTable = ({
+  id,
+  Actualizar,
+  endPoint,
+  titlePopConfirm,
+  titleModal,
+}) => {
   //VARIABLES DE ESTADO
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [dataDefault, setDataDefault] = useState(null);
@@ -12,18 +19,20 @@ const buttonsTable = ({ id, Actualizar }) => {
   const Url = "http://localhost:8000/api";
   //FUNCIONES
   const CloseModal = () => {
+    Actualizar();
     setIsModalOpen(false);
   };
   const Editar = async (id) => {
-    const { data } = await axios.get(`${Url}/categories/${id}`);
+    const { data } = await axios.get(`${Url}${endPoint}${id}`);
     setIsModalOpen(true);
     setDataDefault(data);
   };
 
   const Eliminar = async () => {
     try {
-      await axios.delete(`${Url}/categories/${id.id}`);
+      await axios.delete(`${Url}${endPoint}${id.id}`);
       Actualizar();
+      Delete(titlePopConfirm);
     } catch (error) {
       console.log(error);
     }
@@ -42,7 +51,7 @@ const buttonsTable = ({ id, Actualizar }) => {
         </Tooltip>
         <Tooltip title="Eliminar" placement="right">
           <Popconfirm
-            title="Esta seguro de eliminar esta Categoria?"
+            title={`Esta seguro de eliminar ${titlePopConfirm}?`}
             onConfirm={() => Eliminar()}
             okText="Eliminar"
             cancelText="Cancelar"
@@ -57,12 +66,14 @@ const buttonsTable = ({ id, Actualizar }) => {
           </Popconfirm>
         </Tooltip>
       </Space>
-      <Modal
-        handleCancel={CloseModal}
-        isModalOpen={isModalOpen}
+      <ModalForm
+        isOpenModal={isModalOpen}
         handleOk={CloseModal}
-        title={"Editar Categoria"}
-        data={dataDefault}
+        handleCancel={() => setIsModalOpen(false)}
+        titleModal={titleModal}
+        endPoint={endPoint}
+        titlePopConfirm="la Categoria"
+        value={dataDefault}
       />
     </>
   );

@@ -16,6 +16,11 @@ const menuSiderAdmin = () => {
       label: 'Categorias',
       key: '/admin/categorias',
       icon: <Icon size={1}  path={mdiMicrosoft}  />
+    },
+    {
+      label: 'Sub Categorias',
+      key: '/admin/subCategorias',
+      icon: <Icon size={1}  path={mdiMicrosoft}  />
     }
   ]
   return (

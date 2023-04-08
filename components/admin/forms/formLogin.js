@@ -2,23 +2,25 @@ import React from "react";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input, Space } from "antd";
 import { useRouter } from "next/router";
-import Cookies from 'js-cookie'
+import Cookies from "js-cookie";
 import Link from "next/link";
 import axios from "axios";
+import { Error } from "../notifications";
 
 const formLogin = () => {
   const router = useRouter();
   const onFinish = async (form) => {
-   if( form.username == "Admin" && form.password == "1234567890"){
-    const {data: {token}} = await axios.post('http://localhost:8000/api/login', form)
-    axios.defaults.headers.common = { 'Authorization': `Bearer ${token}` }
-    Cookies.set('token', token)
-    router.push('/admin')
-   }
-   else{
-    alert('error')
-   }
-      
+    try {
+      const {
+        data: { token },
+      } = await axios.post("http://localhost:8000/api/login", form);
+      axios.defaults.headers.common = { Authorization: `Bearer ${token}` };
+      Cookies.set("token", token);
+      router.push("/admin");
+    } catch (error) {
+      Error(error.response.data.msg)
+      console.log(error)
+    }
   };
   return (
     <Form
@@ -59,15 +61,7 @@ const formLogin = () => {
           placeholder="Contrasena"
         />
       </Form.Item>
-      <Form.Item>
-        <Form.Item name="remember" valuePropName="checked" noStyle>
-          <Checkbox>Recordarme</Checkbox>
-        </Form.Item>
-
-        <a className="login-form-forgot" href="">
-          Forgot password
-        </a>
-      </Form.Item>
+ 
 
       <Form.Item>
         <Space

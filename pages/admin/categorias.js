@@ -1,76 +1,85 @@
-import React, { useEffect, useState } from "react";
-import { Divider, Button, Typography, Row, Col, Tooltip } from "antd";
-import Modal from "../../components/admin/modal";
-import ButtonsTable from "<negocio>/components/admin/tables/buttonsTable";
-import Table from "../../components/admin/tables/table";
+import Tabla from "<negocio>/components/admin/tables/table";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-const { Title } = Typography;
-const categorias = () => {
-  //VARIALBES DE ESTADO
-  const [data, setData] = useState([]);
-  const [actualizar, setActualizar] = useState(false)
-  const [isModalOpen, setIsModalOpen] = useState(false);
+import ButtonsTable from "<negocio>/components/admin/tables/buttonsTable";
+import { Table } from "antd";
+import { Divider } from "antd";
+import TitleAndAccion from "<negocio>/components/admin/titleAndAccion";
+import ModalForm from "<negocio>/components/admin/modal";
+const Categorie = () => {
+  // RUTAS
+  const url = "http://localhost:8000/api";
+  const endPoint = "/categories/";
+  const endPointGet = "/categories";
 
-  //VARIABLES
-  const Url = "http://localhost:8000/api";
+  // VARIABLES DE ESTADO
+  const [data, setData] = useState([]);
+  const [openModal, setOpenModal] = useState(false);
+  const [actualizar, setActualizar] = useState(false);
+
+  // FUNCIONES
+  const LoadData = async () => {
+    const { data } = await axios.get(`${url}${endPointGet}`);
+    setData(data);
+  };
+  const CloseModal = () => {
+    setOpenModal(false);
+    setActualizar(!actualizar);
+  };
+  const Create = ()=>{
+    setOpenModal(true) 
+  }
+
+
+  useEffect(() => {
+    LoadData();
+  }, [actualizar]);
+
+  // COLUMNAS DE LA TABLA
   const columns = [
     {
       dataIndex: "id",
       width: 50,
-      key: 'id'
+      key: "id",
     },
     {
-      key: 'name',
+      key: "name",
       title: "Nombre de la Categoria",
       dataIndex: "name",
     },
     {
       title: "Acciones",
-      render: (data, record) => (<ButtonsTable id={record} Actualizar={()=>setActualizar(!actualizar)}/>),
+      render: (data, record) => (
+        <ButtonsTable
+          endPoint={endPoint}
+          titleModal='Editar Categoria'
+          titlePopConfirm="la Categoria"
+          id={record}
+          Actualizar={() => setActualizar(!actualizar)}
+        />
+      ),
       width: 200,
     },
   ];
-
-  //FUNCIONES
-  const OpenModal = () => {
-    setIsModalOpen(true);
-  };
-  const CloseModal = () => {
-    setIsModalOpen(false);
-    setActualizar(!actualizar)
-  };
-  const LoadData = async () => {
-    const { data } = await axios.get(`${Url}/categories/`);
-    setData(data);
-  };
-  useEffect(() => {
-    LoadData();
-  }, [actualizar]);
-  
   return (
     <>
-      <Row gutter={[20, 20]} justify={"space-between"}>
-        <Col span={24}>
-          <Title level={3}>Categorias</Title>
-        </Col>
-        <Col span={24}>
-          <Button type="primary" onClick={() => OpenModal()}>
-            Agregar
-          </Button>
-        </Col>
-      </Row>
-      <Modal
-        handleCancel={()=>setIsModalOpen(false)}
-        handleOk={CloseModal}
-        isModalOpen={isModalOpen}
-        title={"Crear Categoria"}
-        data={null}
+      <TitleAndAccion
+        title={"Categorias"}
+        accion={Create}
+        textButton={"Agregar nueva Categoria"}
       />
-
+      <ModalForm
+        isOpenModal={openModal}
+        handleOk={CloseModal}
+        handleCancel={() => setOpenModal(false)}
+        titleModal={'Nueva categoria'}
+        endPoint={endPoint}
+        titlePopConfirm="la Categoria"
+        value={null}
+      />
       <Divider />
-      <Table columns={columns} data={data} />
+      <Table columns={columns} dataSource={data} />
     </>
   );
 };
-
-export default categorias;
+export default Categorie;
