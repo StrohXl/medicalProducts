@@ -1,4 +1,3 @@
-import Tabla from "<negocio>/components/admin/tables/table";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ButtonsTable from "<negocio>/components/admin/tables/buttonsTable";

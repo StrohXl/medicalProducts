@@ -1,28 +1,25 @@
-import Tabla from "<negocio>/components/admin/tables/table";
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import axios from "axios";
 import ButtonsTable from "<negocio>/components/admin/tables/buttonsTable";
-import FormItem from "antd/es/form/FormItem";
-import { Input, Table } from "antd";
+import { Table } from "antd";
 import { Divider } from "antd";
-
-const SubCategories = () => {
+import TitleAndAccion from "<negocio>/components/admin/titleAndAccion";
+const Categorie = () => {
   // RUTAS
   const url = "http://localhost:8000/api";
   const endPoint = "/categories/";
-  const endPointGet = "/categories";
+  const endPointGet = "/sub_categories/";
 
   // VARIABLES DE ESTADO
   const [data, setData] = useState([]);
   const [actualizar, setActualizar] = useState(false);
-  const [openTour, setOpenTour] = useState(false);
 
   // FUNCIONES
   const LoadData = async () => {
     const { data } = await axios.get(`${url}${endPointGet}`);
     setData(data);
   };
-
   useEffect(() => {
     LoadData();
   }, [actualizar]);
@@ -36,71 +33,39 @@ const SubCategories = () => {
     },
     {
       key: "name",
-      title: "Nombre de la SubCategoria",
+      title: "Nombre de la Sub Categoria",
       dataIndex: "name",
+    },
+    {
+      key: "id",
+      title: "Categoria vinculada",
+      dataIndex: "id",
     },
     {
       title: "Acciones",
       render: (data, record) => (
         <ButtonsTable
           endPoint={endPoint}
-          titlePopConfirm="la SubCategoria"
+          titleModal='Editar Categoria'
+          titlePopConfirm="la Categoria"
           id={record}
           Actualizar={() => setActualizar(!actualizar)}
-          titleModal="Editar SubCategoria"
         />
       ),
       width: 200,
     },
   ];
-const onChange =(e)=>{
-  console.log(e)
-}
-  const steps =[
-    {
-      title: 'Paso 1:',
-      description: 'Agrege el nombre de la sub categoria',
-      cover: (
-        <FormItem name={'name'} rules={[
-          {
-            required: true,
-            message: "Agregre un nombre ",
-          },
-        ]}>
-          <Input placeholder="Nombre..." onChange={onChange} />
-        </FormItem>
-      ),
-    },
-    {
-      title: 'Paso 2:',
-      description: 'Agrege la categoria ',
-      cover: (
-        <FormItem name={'id'} rules={[
-          {
-            required: true,
-            message: "Agregre la categoria ",
-          },
-        ]}>
-          <Input placeholder="Nombre..." onChange={onChange} />
-        </FormItem>
-      ),
-    },
-  ]
+  const router = useRouter()
   return (
     <>
-      <Tabla
-        data={data}
-        columns={columns}
-        endPoint={endPoint}
-        endPointGet={endPointGet}
-        Actualizar={() => setActualizar(!actualizar)}
-        title="SubCategorias"
-        titleModal="Agregar SubCategorias"
-        titlePopConfirm="la SubCategorias"
+      <TitleAndAccion
+        title={"Sub Categorias"}
+        accion={()=>router.push('/admin/createSubCategorie')}
+        textButton={"Agregar nueva Sub Categoria"}
       />
-        <Divider />
-       <Table columns={columns} dataSource={data} />
+      <Divider />
+      <Table columns={columns} dataSource={data} />
     </>
   );
 };
-export default SubCategories;
+export default Categorie;
