@@ -19,6 +19,7 @@ const Categorie = () => {
   const LoadData = async () => {
     const { data } = await axios.get(`${url}${endPointGet}`);
     setData(data);
+    console.log(data)
   };
   useEffect(() => {
     LoadData();

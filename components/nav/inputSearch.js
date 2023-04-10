@@ -2,17 +2,11 @@ import React from "react";
 import { Input } from "antd";
 import { ConfigProvider } from "antd";
 const { Search } = Input;
-const inputSearch = ({placeholder}) => {
-  const onSearch = (e) => {
-    console.log(e);
-  };
+const inputSearch = ({placeholder, onSearch}) => {
+
   return (
     <ConfigProvider
-      theme={{
-        token:{
-          colorPrimary: '#ccc',
-          colorIcon: 'red',
-        },        
+      theme={{      
         components: {
           Input: {
             borderRadius: "1rem",
@@ -21,7 +15,7 @@ const inputSearch = ({placeholder}) => {
         },
       }}
     >
-      <Search size="middle" placeholder={placeholder} onSearch={onSearch} enterButton />
+      <Search size="middle" placeholder={placeholder} onChange={onSearch} enterButton />
     </ConfigProvider>
   );
 };

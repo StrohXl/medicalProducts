@@ -22,7 +22,7 @@ const buttonsTable = ({
     Actualizar();
     setIsModalOpen(false);
   };
-  const Editar = async (id) => {
+  const Editar = async () => {
     const { data } = await axios.get(`${Url}${endPoint}${id}`);
     setIsModalOpen(true);
     setDataDefault(data);
@@ -30,7 +30,7 @@ const buttonsTable = ({
 
   const Eliminar = async () => {
     try {
-      await axios.delete(`${Url}${endPoint}${id.id}`);
+      await axios.delete(`${Url}${endPoint}${id}`);
       Actualizar();
       Delete(titlePopConfirm);
     } catch (error) {
@@ -46,7 +46,7 @@ const buttonsTable = ({
             shape="circle"
             type="text"
             icon={<Icon size={1} path={mdiFileEdit} />}
-            onClick={() => Editar(id.id)}
+            onClick={() => Editar()}
           />
         </Tooltip>
         <Tooltip title="Eliminar" placement="right">
@@ -72,8 +72,9 @@ const buttonsTable = ({
         handleCancel={() => setIsModalOpen(false)}
         titleModal={titleModal}
         endPoint={endPoint}
-        titlePopConfirm="la Categoria"
+        titlePopConfirm={titlePopConfirm}
         value={dataDefault}
+        formType="products"
       />
     </>
   );

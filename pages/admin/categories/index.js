@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ButtonsTable from "<negocio>/components/admin/tables/buttonsTable";
-import { Table } from "antd";
+import { Button, Table } from "antd";
 import { Divider } from "antd";
 import TitleAndAccion from "<negocio>/components/admin/titleAndAccion";
 import ModalForm from "<negocio>/components/admin/modal";
+import Link from "next/link";
+
 const Categorie = () => {
   // RUTAS
   const url = "http://localhost:8000/api";
@@ -17,6 +19,7 @@ const Categorie = () => {
   const [actualizar, setActualizar] = useState(false);
 
   // FUNCIONES
+
   const LoadData = async () => {
     const { data } = await axios.get(`${url}${endPointGet}`);
     setData(data);
@@ -45,6 +48,7 @@ const Categorie = () => {
       key: "name",
       title: "Nombre de la Categoria",
       dataIndex: "name",
+      render: (data, record)=>(<Link  href={`/admin/categories/${record.id}` } >{data}</Link>)
     },
     {
       title: "Acciones",
@@ -53,7 +57,7 @@ const Categorie = () => {
           endPoint={endPoint}
           titleModal='Editar Categoria'
           titlePopConfirm="la Categoria"
-          id={record}
+          id={record.id}
           Actualizar={() => setActualizar(!actualizar)}
         />
       ),
@@ -75,6 +79,7 @@ const Categorie = () => {
         endPoint={endPoint}
         titlePopConfirm="la Categoria"
         value={null}
+        formType='categories'
       />
       <Divider />
       <Table columns={columns} dataSource={data} />
