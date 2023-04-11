@@ -1,37 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import axios from "axios";
 import ButtonsTable from "<negocio>/components/admin/tables/buttonsTable";
 import { Table } from "antd";
 import { Divider } from "antd";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchTodos } from "<negocio>/src/app/features/loadData/loadData";
 import TitleAndAccion from "<negocio>/components/admin/titleAndAccion";
 const Categorie = () => {
   // RUTAS
-  const url = "http://localhost:8000/api";
   const endPoint = "/categories/";
-  const endPointGet = "/sub_categories/";
 
   // VARIABLES DE ESTADO
-  const [data, setData] = useState([]);
   const [actualizar, setActualizar] = useState(false);
-
+  const data = useSelector((state)=> state.load.value)
+  const dispatch = useDispatch()
   // FUNCIONES
-  const LoadData = async () => {
-    const { data } = await axios.get(`${url}${endPointGet}`);
-    setData(data);
-    console.log(data)
-  };
+  const LoadData=()=>{
+    dispatch(fetchTodos(endPoint))
+  }
   useEffect(() => {
-    LoadData();
+    LoadData()
   }, [actualizar]);
 
   // COLUMNAS DE LA TABLA
   const columns = [
-    {
-      dataIndex: "id",
-      width: 50,
-      key: "id",
-    },
     {
       key: "name",
       title: "Nombre de la Sub Categoria",
@@ -39,7 +31,7 @@ const Categorie = () => {
     },
     {
       key: "id",
-      title: "Categoria vinculada",
+      title: "Categoria",
       dataIndex: "id",
     },
     {
@@ -61,7 +53,7 @@ const Categorie = () => {
     <>
       <TitleAndAccion
         title={"Sub Categorias"}
-        accion={()=>router.push('/admin/createSubCategorie')}
+        accion={()=>setActualizar(!actualizar)}
         textButton={"Agregar nueva Sub Categoria"}
       />
       <Divider />
