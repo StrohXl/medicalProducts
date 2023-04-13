@@ -1,10 +1,13 @@
-import { Button, Upload } from "antd";
+import { Upload } from "antd";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import { useState, useEffect } from "react";
-const UploadImg = ({formData, imageUrl, ImageUrl}) => {
+import { useSelector, useDispatch } from "react-redux";
+import { changeUploadImg, changeFormImg } from "<negocio>/src/app/features/Data/dataExtra";
+const UploadImg = () => {
   // VARIABLES DE ESTADO
+  const img = useSelector(state=> state.extra.uploadImg)
+  const dispatch = useDispatch()
   const [loading, setLoading] = useState(false);
-
   // FUNCIONES
   const getBase64 = (img, callback) => {
     const reader = new FileReader();
@@ -23,10 +26,10 @@ const UploadImg = ({formData, imageUrl, ImageUrl}) => {
     return false;
   };
   const handleChangeImg = async (info) => {
-    formData(info)
+    dispatch(changeFormImg(info.file))
     getBase64(info.fileList[0].originFileObj, (url) => {
-      setLoading(false);
-      ImageUrl(url);
+      setLoading(false)
+      dispatch(changeUploadImg(url))
     });
     if (info.file.status === "uploading") {
       setLoading(true);
@@ -45,9 +48,9 @@ const UploadImg = ({formData, imageUrl, ImageUrl}) => {
       onChange={handleChangeImg}
     >
       <div>
-        {imageUrl ? (
+        {img != '' ? (
           <img
-            src={imageUrl}
+            src={img}
             alt="avatar"
             style={{  height: "100px", width: '100px' }}
           />

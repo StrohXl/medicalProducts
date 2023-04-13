@@ -4,22 +4,32 @@ import { mdiDelete, mdiFileEdit } from "@mdi/js";
 import Icon from "@mdi/react";
 import axios from "axios";
 import ModalForm from "../modal";
+import { useSelector, useDispatch } from "react-redux";
+import { useRouter } from "next/router";
+import {
+  changeActualizar,
+  changeOpenModal,
+  changeTitleModal,
+} from "<negocio>/src/app/features/Data/dataExtra";
 import { Delete } from "../notifications";
 const buttonsTable = ({
   id,
-  Actualizar,
   endPoint,
   titlePopConfirm,
   titleModal,
+  subCategorie,
 }) => {
+  const router = useRouter();
   //VARIABLES DE ESTADO
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [dataDefault, setDataDefault] = useState(null);
+  const actualizar = useSelector((state) => state.extra.actualizar);
+  const dispatch = useDispatch();
   //VARIABLES
   const Url = "http://localhost:8000/api";
   //FUNCIONES
   const CloseModal = () => {
-    Actualizar();
+    dispatch(changeActualizar(!actualizar));
     setIsModalOpen(false);
   };
   const Editar = async () => {
@@ -31,7 +41,7 @@ const buttonsTable = ({
   const Eliminar = async () => {
     try {
       await axios.delete(`${Url}${endPoint}${id}`);
-      Actualizar();
+      dispatch(changeActualizar(!actualizar));
       Delete(titlePopConfirm);
     } catch (error) {
       console.log(error);
@@ -46,7 +56,12 @@ const buttonsTable = ({
             shape="circle"
             type="text"
             icon={<Icon size={1} path={mdiFileEdit} />}
-            onClick={() => Editar()}
+            onClick={() => {
+              subCategorie
+                ? router.push(`/admin/subCategorias/${id}`)
+                : dispatch(changeOpenModal(true)),
+                dispatch(changeTitleModal(titleModal));
+            }}
           />
         </Tooltip>
         <Tooltip title="Eliminar" placement="right">

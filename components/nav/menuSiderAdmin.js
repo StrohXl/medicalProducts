@@ -2,7 +2,7 @@ import React from "react";
 import { useRouter } from "next/router";
 import { Menu } from "antd";
 import Icon from "@mdi/react";
-import { mdiMicrosoft, mdiHome } from "@mdi/js";
+import { mdiMicrosoft, mdiHome,mdiVectorLink, mdiMedicationOutline, mdiCurrencyUsd  } from "@mdi/js";
 const menuSiderAdmin = () => {
   const router = useRouter();
 
@@ -20,12 +20,17 @@ const menuSiderAdmin = () => {
     {
       label: 'Sub Categorias',
       key: '/admin/subCategorias',
-      icon: <Icon size={1}  path={mdiMicrosoft}  />
+      icon: <Icon size={1}  path={mdiVectorLink }  />
     },
     {
       label: 'Productos',
       key: '/admin/products',
-      icon: <Icon size={1}  path={mdiMicrosoft}  />
+      icon: <Icon size={1}  path={mdiMedicationOutline}  />
+    },
+    {
+      label: 'Lista de Precios',
+      key: '/admin/listPrice',
+      icon: <Icon path={mdiCurrencyUsd} size={1} />
     }
   ]
   return (

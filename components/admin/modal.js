@@ -53,7 +53,7 @@ const modal = ({
           formData.set("description", values.description);
           formData.set("stock", values.stock);
           formData.set("category", id);
-          formData.set("productImage", img, img.name);
+          formData.set("productImage", img);
           await axios.put(`${Url}${endPoint}${value.id}`, formData);
         }
         if (formType == "categories") {
@@ -81,6 +81,7 @@ const modal = ({
       form.resetFields();
     } else {
       console.log(value.productImage)
+      setImg(value.productImage);
       form.resetFields();
       form.setFieldValue(value);
     }

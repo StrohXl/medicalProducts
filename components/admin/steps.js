@@ -1,27 +1,49 @@
 import { Popconfirm } from "antd";
+import axios from "axios";
 import { Button, Steps, theme } from "antd";
-import { useState } from "react";
-const steps = ({ steps, Guardar, paso1, paso2 }) => {
+import { useSelector, useDispatch } from "react-redux";
+import { changeCurrentSteps } from "<negocio>/src/app/features/Data/dateSteps";
+import {
+  changeOpenModal,
+  changeActualizar,
+} from "<negocio>/src/app/features/Data/dataExtra";
+const steps = () => {
   const { token } = theme.useToken();
-  const [current, setCurrent] = useState(0);
-
+  const datosSteps = useSelector((state) => state.steps);
+  const current = useSelector((state) => state.steps.currentSteps);
+  const productImg = useSelector((state) => state.extra.formImg);
+  const actualizar = useSelector((state) => state.extra.actualizar);
+  const dispatch = useDispatch();
+  const steps = datosSteps.steps;
   const items = steps.map((item) => ({
     key: item.title,
     title: item.title,
   }));
 
   const contentStyle = {
-    lineHeight: "260px",
+    display: "flex",
+    flexDirection: "column",
     color: token.colorTextTertiary,
     marginTop: "2rem",
   };
+  const Guardar = async () => {
+    const formData = new FormData();
+    formData.set("name", datosSteps.paso1);
+    formData.set("description", datosSteps.paso2);
+    formData.set("stock", datosSteps.paso3);
+    formData.set("category", datosSteps.paso4);
+    formData.set("productImage", productImg);
+    await axios.post("http://localhost:8000/api/products/", formData);
+    dispatch(changeOpenModal(false));
+    dispatch(changeActualizar(!actualizar));
+  };
 
   const next = () => {
-    setCurrent(current + 1);
+    dispatch(changeCurrentSteps(current + 1));
   };
 
   const prev = () => {
-    setCurrent(current - 1);
+    dispatch(changeCurrentSteps(current - 1));
   };
 
   return (
@@ -47,17 +69,13 @@ const steps = ({ steps, Guardar, paso1, paso2 }) => {
           </Button>
         )}
         {current === steps.length - 1 && (
-          <Popconfirm
-              title='Estas seguro de Crear esta Sub Categoria?'
-              onConfirm={Guardar}
-              okText='Guardar'
-              cancelText='Cancelar'
+          <Button
+            type="primary"
+            onClick={() => Guardar()}
+            disabled={datosSteps.paso4 == "" ? true : false}
           >
-          <Button type="primary" >
             Guardar
           </Button>
-  
-          </Popconfirm>
         )}
         {current < steps.length - 1 && (
           <Button
@@ -65,11 +83,15 @@ const steps = ({ steps, Guardar, paso1, paso2 }) => {
             onClick={() => next()}
             disabled={
               current == 0
-                ? paso1.name == "" || paso1 == ""
+                ? datosSteps.paso1 == "" || datosSteps.paso2 == ""
                   ? true
                   : false
                 : current == 1
-                ? paso2 == "" || paso2 == ""
+                ? datosSteps.paso3 == "" || datosSteps.uploadImg == ""
+                  ? true
+                  : false
+                : current == 2
+                ? datosSteps.paso4 == ""
                   ? true
                   : false
                 : ""

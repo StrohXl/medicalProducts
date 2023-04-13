@@ -4,11 +4,11 @@ import ButtonsTable from "<negocio>/components/admin/tables/buttonsTable";
 import { Table } from "antd";
 import { Divider } from "antd";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchTodos } from "<negocio>/src/app/features/loadData/loadData";
+import { loadData } from "<negocio>/src/app/features/Data/Data"
 import TitleAndAccion from "<negocio>/components/admin/titleAndAccion";
 const Categorie = () => {
   // RUTAS
-  const endPoint = "/categories/";
+  const endPoint = "/sub_categories/";
 
   // VARIABLES DE ESTADO
   const [actualizar, setActualizar] = useState(false);
@@ -16,7 +16,7 @@ const Categorie = () => {
   const dispatch = useDispatch()
   // FUNCIONES
   const LoadData=()=>{
-    dispatch(fetchTodos(endPoint))
+    dispatch(loadData({endPoint: endPoint}))
   }
   useEffect(() => {
     LoadData()
@@ -40,9 +40,10 @@ const Categorie = () => {
         <ButtonsTable
           endPoint={endPoint}
           titleModal='Editar Categoria'
-          titlePopConfirm="la Categoria"
-          id={record}
+          titlePopConfirm="la Sub Categoria"
+          id={record.id}
           Actualizar={() => setActualizar(!actualizar)}
+          subCategorie={true}
         />
       ),
       width: 200,
@@ -53,7 +54,7 @@ const Categorie = () => {
     <>
       <TitleAndAccion
         title={"Sub Categorias"}
-        accion={()=>setActualizar(!actualizar)}
+        accion={()=>router.push('/admin/subCategorias/createSubCategorie')}
         textButton={"Agregar nueva Sub Categoria"}
       />
       <Divider />

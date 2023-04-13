@@ -18,6 +18,8 @@ const formLogin = () => {
       Cookies.set("token", token);
       router.push("/admin");
     } catch (error) {
+      error.response.status == 400?
+      Error(error.response.data.msg):
       console.log(error)
     }
   };

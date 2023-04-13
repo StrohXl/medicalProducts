@@ -1,49 +1,31 @@
-import React, { useState } from "react";
-import { items } from "./itemsNav";
-import {
-  UserOutlined,
-  ShoppingCartOutlined,
-  MenuOutlined,
-} from "@ant-design/icons";
-import {
-  Menu,
-  Typography,
-  Tooltip,
-  Space,
-  Button,
-  theme,
-  Row,
-  Col,
-} from "antd";
+import React,{useState} from "react";
+import Menu from "./menu";
+import { UserOutlined, MenuOutlined } from "@ant-design/icons";
+import { Typography, Tooltip, Button, theme, Row, Col } from "antd";
 import InputSearch from "./inputSearch";
 import Link from "next/link";
-import { ConfigProvider } from "antd";
+import Drawer from "./drawer";
 const { Title } = Typography;
-
 const Nav = () => {
   const { token } = theme.useToken();
-  const [current, setCurrent] = useState("mail");
-
-  const onClick = (e) => {
-    setCurrent(e.key);
-  };
   const CssCol = { lineHeigth: "100%" };
+  const [openDrawer, setOpenDrawer] = useState(false)
 
   return (
     <>
-      <Row gutter={20} style={{padding: "5px 0 0" }}>
+      <Row gutter={20} style={{ padding: "5px 0 0" }}>
         <Col xl={4.7}>
           <Link href={"/"}>
- 
-              <Title level={3} style={{padding: "2px 0 0" }}>
-                <span style={{ color: "#1677ff", fontWeight: 'bold' }}>MEDIC</span>
-                <span style={{ color: token.colorSecondary }}>PRODUCTS  </span>
-              </Title>
-
+            <Title level={3} style={{ padding: "2px 0 0" }}>
+              <span style={{ color: "#1677ff", fontWeight: "bold" }}>
+                MEDIC
+              </span>
+              <span style={{ color: token.colorSecondary }}>PRODUCTS </span>
+            </Title>
           </Link>
         </Col>
         <Col xs={0} md={10} style={{ lineHeight: "100%", paddingTop: "5px" }}>
-          <InputSearch placeholder={'Buscar Medicina'} />
+          <InputSearch placeholder={"Buscar Medicina"} />
         </Col>
         <Col
           className="col_groupButtons"
@@ -55,21 +37,20 @@ const Nav = () => {
             position: "absolute",
           }}
         >
-            <a href={"/login"}>
-              <Tooltip
-                title="Ingresar"
-                arrow={false}
-                style={{ paddingTop: "30px" }}
-              >
-                <Button
-                  shape="circle"
-                  size="large"
-                  type="default"
-                  icon={<UserOutlined />}
-                />
-              </Tooltip>
-            </a>
-       
+          <a href={"/login"}>
+            <Tooltip
+              title="Ingresar"
+              arrow={false}
+              style={{ paddingTop: "30px" }}
+            >
+              <Button
+                shape="circle"
+                size="large"
+                type="default"
+                icon={<UserOutlined />}
+              />
+            </Tooltip>
+          </a>
         </Col>
         <Col
           md={0}
@@ -81,18 +62,12 @@ const Nav = () => {
             position: "absolute",
           }}
         >
-          <Button type="text" icon={<MenuOutlined />} />
+          <Button type="text" onClick={()=>setOpenDrawer(true)} icon={<MenuOutlined />} />
         </Col>
         <Col md={24} xs={0}>
-          <Menu
-            className="menu"
-            onClick={onClick}
-            selectedKeys={[current]}
-            mode="horizontal"
-            items={items}
-
-          />
+          <Menu mode={'horizontal'} />
         </Col>
+        <Drawer open={openDrawer} onClose={()=>setOpenDrawer(false)} />
       </Row>
     </>
   );

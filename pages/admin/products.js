@@ -1,54 +1,138 @@
-import React from "react";
 import { useState, useEffect } from "react";
-import axios from "axios";
-import { useRouter } from "next/router";
 import ButtonsTable from "<negocio>/components/admin/tables/buttonsTable";
 import TitleAndAccion from "<negocio>/components/admin/titleAndAccion";
-import { Table } from "antd";
-import ModalForm from "<negocio>/components/admin/modal";
-import { Avatar } from "antd";
-import { Divider } from "antd";
+import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
+import UploadImg from "<negocio>/components/admin/forms/upload";
+import {
+  Table,
+  Avatar,
+  Divider,
+  Typography,
+  Input,
+  Space,
+  InputNumber,
+} from "antd";
+import { loadData } from "<negocio>/src/app/features/Data/Data";
+import {
+  changePaso1,
+  changePaso2,
+  changePaso3,
+  changePaso4,
+  changeSteps,
+} from "<negocio>/src/app/features/Data/dateSteps";
+import {
+  changeOpenModal,
+  changeTitleModal,
+  changeFormType,
+} from "<negocio>/src/app/features/Data/dataExtra";
+import { changeStepsDefault } from "<negocio>/src/app/features/Data/dateSteps";
+import ModalFormProducts from "<negocio>/components/admin/modalFormProducts";
+const { Title } = Typography;
+
 const index = () => {
   // VARIABLES
-  const router = useRouter();
-  // RUTAS
-  const ruta = "http://localhost:8000/api";
+  const dispatch = useDispatch();
+  const datos = useSelector((state) => state.load.value);
+  const datosSteps = useSelector((state) => state.steps);
+  const actualizar = useSelector((state) => state.extra.actualizar);
+  const [auxData, setAuxData] = useState([]);
   const endPoint = "/products/";
 
   // VARIABLES DE ESTADO
-  const [data, setData] = useState([]);
-  const [actualizar, setActualizar] = useState(false)
-  const [openModal, setOpenModal] = useState(false);
 
   // FUNCIONES
 
-  const CloseModal = () => {
-    setOpenModal(false);
-    setActualizar(!actualizar)
+  const rowSelection = {
+    onChange: (selectedRowKeys, selectedRows) => {
+      dispatch(changePaso4(selectedRows[0].id));
+    },
+  };
+
+  const loadDataExtra = async () => {
+    const { data } = await axios.get(`http://localhost:8000/api/categories/`);
+    data.map((i) => (i.key = i.id));
+    setAuxData(data);
+  };
+  const ChangeSteps = () => {
+    dispatch(
+      changeSteps({
+        contentFirst: (
+          <Space direction="vertical" size="large">
+            <div>
+              <Title level={5}>Nombre del Producto:</Title>
+              <Input
+                size="large"
+                onChange={(e) => dispatch(changePaso1(e.target.value))}
+                defaultValue={datosSteps.paso1 == ''? '': datosSteps.paso1}
+              />
+            </div>
+            <div>
+              <Title level={5}>Descripcion del Producto:</Title>
+              <Input.TextArea
+                defaultValue={datosSteps.paso2 == ''? '': datosSteps.paso2}
+                onChange={(e) => dispatch(changePaso2(e.target.value))}
+              />
+            </div>
+          </Space>
+        ),
+        second: {
+          title: "Second",
+          content: (
+            <Space direction="vertical" size="large">
+              <div>
+                <Title level={5}>Productos Existentes:</Title>
+                <InputNumber
+                  min={1}
+                  max={1000}
+                  size="large"
+                  onChange={(e) => dispatch(changePaso3(e))}
+                />
+              </div>
+              <div>
+                <Title level={4}>Escoja una imagen para el Producto:</Title>
+                <UploadImg />
+              </div>
+            </Space>
+          ),
+        },
+        thirst: {
+          title: "Thirst",
+          content: (
+            <Table
+              dataSource={auxData}
+              columns={[
+                {
+                  key: "name",
+                  title: "Nombre de la Categoria",
+                  dataIndex: "name",
+                },
+              ]}
+              rowSelection={{ type: "radio", ...rowSelection }}
+            />
+          ),
+        },
+      })
+    );
   };
   const onSearch = async (value) => {
-    console.log(value.target.value);
-    const { data } = await axios.get(`${ruta}/products`, {
-      params: {
-        search: value.target.value,
-      },
-    });
-    setData(data);
+    dispatch(loadData({ endPoint: endPoint, search: value.target.value }));
   };
 
   const LoadData = async () => {
-    try {
-      const { data } = await axios.get(
-        `http://localhost:8000/api/products`
-      );
-      setData(data);
-    } catch (error) {
-      console.log(error);
-    }
+    dispatch(loadData({ endPoint: endPoint }));
+    loadDataExtra();
   };
+
+  const openModal = () => {
+    dispatch(changeOpenModal(true));
+    dispatch(changeStepsDefault());
+    dispatch(changeTitleModal("Agregar Producto"));
+    dispatch(changeFormType("createProduct"));
+    ChangeSteps();
+  };
+
   useEffect(() => LoadData, [actualizar]);
-
-
 
   // COLUMNAS DE LA TABLA
   const columns = [
@@ -82,41 +166,29 @@ const index = () => {
       dataIndex: "price",
     },
     {
-      title: 'Acciones',
-      render:(data,record)=>(
+      title: "Acciones",
+      render: (data, record) => (
         <ButtonsTable
-        id={record.id}
-        Actualizar={()=>setActualizar(!actualizar)}
-        endPoint={endPoint}
-        titlePopConfirm={'este Producto?'}
-        titleModal={'Editar Producto'}
-        />)
-      
-    }
-
+          id={record.id}
+          endPoint={endPoint}
+          titlePopConfirm={"este Producto?"}
+          titleModal={"Editar Producto"}
+        />
+      ),
+    },
   ];
-
   return (
     <>
       <TitleAndAccion
-        title='Productos'
-        accion={()=>setOpenModal(true)}
+        title="Productos"
+        accion={() => openModal()}
         textButton={"Agregar Producto"}
         showInputSearch={true}
         onSearch={onSearch}
       />
-      <ModalForm
-        isOpenModal={openModal}
-        handleOk={CloseModal}
-        handleCancel={() => setOpenModal(false)}
-        titleModal={"Nuevo Producto"}
-        endPoint={endPoint}
-        titlePopConfirm="el Producto"
-        value={null}
-        formType="products"
-      />
       <Divider />
-      <Table dataSource={data} columns={columns} />
+      <Table dataSource={datos} columns={columns} />
+      <ModalFormProducts />
     </>
   );
 };
