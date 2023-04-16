@@ -5,24 +5,19 @@ const initialState = {
   openModal: false,
   titleModal: "",
   popConfirm: "",
-  uploadImg: '',
-  formImg: '',
+  endPoint: '',
   actualizar: false,
   placeholderInput: "",
-  form: {
-    name: "",
-    img: "",
-    description: "",
-    stock: "",
-    category: "",
-  },
-
+  labelName: ''
 };
 
 export const dataExtra = createSlice({
   name: "dataExtra",
   initialState,
   reducers: {
+    changeLabelName: (state, actions) => {
+      state.labelName = actions.payload;
+    },
     changeFormType: (state, actions) => {
       state.formType = actions.payload;
     },
@@ -36,8 +31,8 @@ export const dataExtra = createSlice({
     changePopConfirm: (state, actions) => {
       state.popConfirm = actions.payload;
     },
-    changeFormImg: (state, actions) => {
-      state.formImg = actions.payload;
+    changeEndPoint: (state, actions) => {
+      state.endPoint = actions.payload;
     },
     changeActualizar: (state, actions) => {
       state.actualizar = actions.payload;
@@ -46,20 +41,17 @@ export const dataExtra = createSlice({
       state.modalType = actions.payload;
     },
 
-    changeUploadImg: (state, actions) => {
-      state.uploadImg = actions.payload;
-    },
   },
 });
 export const {
+  changeLabelName,
   changeActualizar,
+  changeEndPoint,
   changeFormType,
   changeOpenModal,
   changePopConfirm,
   changeModalType,
   changeTitleModal,
-  changeFormImg,
-  changeUploadImg
 } = dataExtra.actions;
 
 export default dataExtra.reducer;

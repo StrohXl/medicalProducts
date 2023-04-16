@@ -2,13 +2,18 @@ import { Upload } from "antd";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { changeUploadImg, changeFormImg } from "<negocio>/src/app/features/Data/dataExtra";
+import { changeformDateProductImage } from "<negocio>/src/app/features/Data/formData";
 const UploadImg = () => {
+
+  // SELECTORES
+   const editData = useSelector(state=>state.edit.value)
+   const dataExtra = useSelector(state=>state.extra)
+
   // VARIABLES DE ESTADO
-  const img = useSelector(state=> state.extra.uploadImg)
-  const dispatch = useDispatch()
+  const [urlImg, setUrlImg] = useState("");
   const [loading, setLoading] = useState(false);
   // FUNCIONES
+  const dispatch = useDispatch();
   const getBase64 = (img, callback) => {
     const reader = new FileReader();
     reader.addEventListener("load", () => callback(reader.result));
@@ -26,17 +31,22 @@ const UploadImg = () => {
     return false;
   };
   const handleChangeImg = async (info) => {
-    dispatch(changeFormImg(info.file))
+    dispatch(changeformDateProductImage(info.file));
     getBase64(info.fileList[0].originFileObj, (url) => {
-      setLoading(false)
-      dispatch(changeUploadImg(url))
+      setUrlImg(url);
+      setLoading(false);
     });
     if (info.file.status === "uploading") {
       setLoading(true);
       return;
     }
   };
-
+  useEffect(()=>{
+    dataExtra.modalType == 'put'?
+    (setUrlImg(editData.productImage),
+    dispatch(changeformDateProductImage('nada'))):
+    setUrlImg('')
+  },[editData, dataExtra])
   return (
     <Upload
       listType="picture-card"
@@ -44,15 +54,15 @@ const UploadImg = () => {
       showUploadList={false}
       name="avatar"
       maxCount={1}
-      beforeUpload={beforeUpload}
       onChange={handleChangeImg}
+      beforeUpload={beforeUpload}
     >
       <div>
-        {img != '' ? (
+        {urlImg != ''?(
           <img
-            src={img}
+            src={urlImg}
             alt="avatar"
-            style={{  height: "100px", width: '100px' }}
+            style={{ height: "100px", width: "100px" }}
           />
         ) : (
           <div>

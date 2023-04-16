@@ -19,7 +19,7 @@ const menuSiderAdmin = () => {
     },
     {
       label: 'Sub Categorias',
-      key: '/admin/subCategorias',
+      key: '/admin/subCategories',
       icon: <Icon size={1}  path={mdiVectorLink }  />
     },
     {

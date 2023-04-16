@@ -1,41 +1,52 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import ButtonsTable from "<negocio>/components/admin/tables/buttonsTable";
 import { Button, Table } from "antd";
 import { Divider } from "antd";
+import { useSelector, useDispatch } from "react-redux";
 import TitleAndAccion from "<negocio>/components/admin/titleAndAccion";
+import { useRouter } from "next/router";
+import {
+  changeOpenModal,
+  changeFormType,
+  changeModalType,
+  changeTitleModal,
+} from "<negocio>/src/app/features/Data/dataExtra";
+import { loadEditData } from "<negocio>/src/app/features/Data/editData";
+import { loadData } from "<negocio>/src/app/features/Data/LoadData";
 import ModalForm from "<negocio>/components/admin/modal";
 import Link from "next/link";
 
 const Categorie = () => {
-  // RUTAS
-  const url = "http://localhost:8000/api";
-  const endPoint = "/categories/";
-  const endPointGet = "/categories";
-
-  // VARIABLES DE ESTADO
-  const [data, setData] = useState([]);
-  const [openModal, setOpenModal] = useState(false);
-  const [actualizar, setActualizar] = useState(false);
-
+    // VARIABLES DE ESTADO
+  const router = useRouter()
+  const [endPoint, setEndPoint] = useState("");
+  const actualizar = useSelector(state=>state.extra.actualizar)
+  const data = useSelector(state=>state.load.value)
   // FUNCIONES
-
+  const dispatch = useDispatch();
   const LoadData = async () => {
-    const { data } = await axios.get(`${url}${endPointGet}`);
-    setData(data);
+    dispatch(loadData({endPoint: '/categories'}))
   };
-  const CloseModal = () => {
-    setOpenModal(false);
-    setActualizar(!actualizar);
-  };
-  const Create = ()=>{
-    setOpenModal(true) 
-  }
 
+  const openModal = () => {
+    dispatch(changeOpenModal(true))
+    dispatch(changeTitleModal('Agregar Categoria'))
+    dispatch(changeFormType('formCategories'))
+    dispatch(changeModalType('post'))
+    setEndPoint("/categories/");
+  };
+  const openModalEdit = (id) => {
+    dispatch(loadEditData("/categories/" + id))
+    dispatch(changeOpenModal(true))
+    dispatch(changeTitleModal('Editar Categoria'))
+    dispatch(changeFormType('formCategories'))
+    dispatch(changeModalType('put'))
+    setEndPoint("/categories/" + id);
+  };
 
   useEffect(() => {
     LoadData();
-  }, [actualizar]);
+  }, [actualizar, router]);
 
   // COLUMNAS DE LA TABLA
   const columns = [
@@ -48,17 +59,18 @@ const Categorie = () => {
       key: "name",
       title: "Nombre de la Categoria",
       dataIndex: "name",
-      render: (data, record)=>(<Link  href={`/admin/categories/${record.id}` } >{data}</Link>)
+      render: (data, record) => (
+        <Link href={`/admin/categories/${record.id}`}>{data}</Link>
+      ),
     },
     {
       title: "Acciones",
       render: (data, record) => (
         <ButtonsTable
-          endPoint={endPoint}
-          titleModal='Editar Categoria'
+          endPoint={'/categories/'}
           titlePopConfirm="la Categoria"
           id={record.id}
-          Actualizar={() => setActualizar(!actualizar)}
+          functionEdit={()=>openModalEdit(record.id)}
         />
       ),
       width: 200,
@@ -68,19 +80,10 @@ const Categorie = () => {
     <>
       <TitleAndAccion
         title={"Categorias"}
-        accion={Create}
-        textButton={"Agregar nueva Categoria"}
+        accion={openModal}
+        textButton={"Agregar Categoria"}
       />
-      <ModalForm
-        isOpenModal={openModal}
-        handleOk={CloseModal}
-        handleCancel={() => setOpenModal(false)}
-        titleModal={'Nueva categoria'}
-        endPoint={endPoint}
-        titlePopConfirm="la Categoria"
-        value={null}
-        formType='categories'
-      />
+      <ModalForm endPoint={endPoint} />
       <Divider />
       <Table columns={columns} dataSource={data} />
     </>

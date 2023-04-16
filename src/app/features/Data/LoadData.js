@@ -13,24 +13,11 @@ export const loadData = createAsyncThunk(
     return data;
   }
 );
-export const editData = createAsyncThunk(
-  "data/Data",
-  async (state, actions) => {
-    await axios.put(`${url}${state}`);
-  }
-);
-export const deleteData = createAsyncThunk(
-  "data/Data",
-  async (state, actions) => {
-    await axios.delete(`${url}${state}`);
-  }
-);
 
 export const Data = createSlice({
   name: "data",
   initialState: { value: 0, valueExtra: [] },
-  reducers: {
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(loadData.pending, (state, actions) => {
@@ -38,9 +25,8 @@ export const Data = createSlice({
       })
       .addCase(loadData.fulfilled, (state, actions) => {
         state.value = actions.payload;
-      })
-      
-  }
+      });
+  },
 });
 
 export default Data.reducer;

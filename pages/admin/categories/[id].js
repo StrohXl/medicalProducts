@@ -1,44 +1,62 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { useRouter } from "next/router";
 import ButtonsTable from "<negocio>/components/admin/tables/buttonsTable";
+import axios from "axios";
 import TitleAndAccion from "<negocio>/components/admin/titleAndAccion";
 import { Table } from "antd";
-import ModalForm from "<negocio>/components/admin/modal";
 import { Avatar } from "antd";
 import { Divider } from "antd";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  changeActualizar,
+  changeFormType,
+  changeLabelName,
+  changeModalType,
+  changeOpenModal,
+  changeTitleModal,
+} from "<negocio>/src/app/features/Data/dataExtra";
+import { loadData } from "<negocio>/src/app/features/Data/LoadData";
+import { loadEditData } from "<negocio>/src/app/features/Data/editData";
+import ModalForm from "<negocio>/components/admin/modal";
 const index = () => {
   // VARIABLES
+  const dispatch = useDispatch()
+  const [title, setTitle] = useState('')
   const router = useRouter();
   const id = router.query.id;
-  console.log(id);
-
+  const data = useSelector(state=>state.load.value)
+  const actualizar = useSelector(state=>state.extra.actualizar)
   // RUTAS
-  const ruta = "http://localhost:8000/api";
-  const endPoint = "/products/";
+  const [endPoint, setEndPoint] = useState();
 
   // VARIABLES DE ESTADO
-  const [data, setData] = useState([]);
-  const [title, setTitle] = useState("");
-  const [actualizar, setActualizar] = useState(false)
-  const [openModal, setOpenModal] = useState(false);
 
   // FUNCIONES
-  const CloseModal = () => {
-    setOpenModal(false);
-    setActualizar(!actualizar)
+  const openModal = () => {
+    dispatch(changeOpenModal(true))
+    dispatch(changeTitleModal('Agregar Producto'))
+    dispatch(changeFormType('formProductsCategory'))
+    dispatch(changeModalType('post'))
+    setEndPoint('/products/')
   };
-  const onSearch = async (value) => {
-    console.log(value.target.value);
-    const { data } = await axios.get(`${ruta}/products`, {
-      params: {
-        search: value.target.value,
-        category: id,
-      },
-    });
-    setData(data);
+  const openModalEdit = (id) => {
+    setEndPoint('/products/'+id)
+    dispatch(changeOpenModal(true))
+    dispatch(changeTitleModal('Editar Producto'))
+    dispatch(changeFormType('formProductsCategory'))
+    dispatch(changeModalType('put'))
+    dispatch(loadEditData('/products/'+id))
   };
+
+  const LoadData = async () => {
+    dispatch(changeLabelName('Nombre del Producto'))
+    dispatch(loadData({endPoint: '/products/', value: id}))
+    const dataCategory = await axios.get('http://localhost:8000/api/categories')
+    const filter = dataCategory.data.filter(i=> i.id == id)
+    setTitle(filter.length > 0? filter[0].name: 'no hay datos')
+  };
+  useEffect(() => LoadData, [actualizar]);
 
   // COLUMNAS DE LA TABLA
   const columns = [
@@ -72,58 +90,31 @@ const index = () => {
       dataIndex: "price",
     },
     {
-      title: 'Acciones',
-      render:(data,record)=>(
+      title: "Acciones",
+      render: (data, record) => (
         <ButtonsTable
-        id={record.id}
-        Actualizar={()=>setActualizar(!actualizar)}
-        endPoint={endPoint}
-        titlePopConfirm={'este Producto?'}
-        titleModal={'Editar Producto'}
-        />)
-      
-    }
-
+          id={record.id}
+          Actualizar={() => dispatch(changeActualizar(!actualizar))}
+          endPoint={"/products/"}
+          titlePopConfirm={"este Producto?"}
+          functionEdit={() => openModalEdit(record.id)}
+        />
+      ),
+    },
   ];
 
-  // FUNCIONES LOADDATA
-  const LoadData = async () => {
-    try {
-      const { data } = await axios.get(
-        `http://localhost:8000/api/products?category=${id}`
-      );
-      setData(data);
-      console.log(data);
-      const title = await axios.get(
-        `http://localhost:8000/api/categories/${id}`
-      );
-      setTitle(title.data.name);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  useEffect(() => LoadData, [actualizar]);
+
   return (
     <>
       <TitleAndAccion
         title={title}
-        accion={()=>setOpenModal(true)}
+        accion={openModal}
         textButton={"Agregar Producto"}
         showInputSearch={true}
-        onSearch={onSearch}
-      />
-      <ModalForm
-        isOpenModal={openModal}
-        handleOk={CloseModal}
-        handleCancel={() => setOpenModal(false)}
-        titleModal={"Nuevo Producto"}
-        endPoint={endPoint}
-        titlePopConfirm="el Producto"
-        value={null}
-        formType="products"
       />
       <Divider />
       <Table dataSource={data} columns={columns} />
+      <ModalForm endPoint={endPoint}/>
     </>
   );
 };

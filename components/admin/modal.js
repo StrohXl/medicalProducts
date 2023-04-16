@@ -1,108 +1,90 @@
-import { useEffect, useState } from "react";
-import { Modal, Form } from "antd";
-import FormCategorie from "./forms/formCategorie";
-import FormProducts from "./forms/formProducts";
-import { Create, Edit, Error } from "./notifications";
+import { Modal } from "antd";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  changeOpenModal,
+  changeActualizar,
+} from "<negocio>/src/app/features/Data/dataExtra";
 import { useRouter } from "next/router";
 import axios from "axios";
-const modal = ({
-  isOpenModal,
-  handleOk,
-  handleCancel,
-  titleModal,
-  value,
-  endPoint,
-  titlePopConfirm,
-  formType,
-}) => {
+import FormGlobal from "./forms/formGlobal";
+import FormCategorie from "./forms/formCategorie";
+import { mdiArrowExpandHorizontal } from "@mdi/js";
+const ModalGlobal = ({ endPoint }) => {
   // VARIABLES
   const router = useRouter();
-  const id = router.query.id;
-  const [form] = Form.useForm();
-  const Url = "http://localhost:8000/api";
-  const [img, setImg] = useState(null);
+  const url = "http://localhost:8000/api";
+  const dispatch = useDispatch();
+
+  // SELECTORES
+  const actualizar = useSelector((state) => state.extra.actualizar);
+  const datos = useSelector((state) => state.extra);
+  const auxData = useSelector((state) => state.form);
+  const modalType = useSelector((state) => state.extra.modalType);
 
   // FUNCIONES
-  const Guardar = async (values) => {
-    if (value == null) {
-      try {
-        if (formType == "products") {
-          const formData = new FormData();
-          formData.set("name", values.name);
-          formData.set("description", values.description);
-          formData.set("stock", values.stock);
-          formData.set("category", id);
-          formData.set("productImage", img, img.name);
-          await axios.post(`${Url}${endPoint}`, formData);
-        }
-        if (formType == "categories") {
-          await axios.post(`${Url}${endPoint}`, values);
-        }
-        handleOk();
-        Create(titlePopConfirm);
-      } catch (error) {
-        error.response.status == 400
-          ? Error("El nombre debe de ser unico")
-          : console.log(error);
-      }
-    } else {
-      try {
-        if (formType == "products") {
-          const formData = new FormData();
-          formData.set("name", values.name);
-          formData.set("description", values.description);
-          formData.set("stock", values.stock);
-          formData.set("category", id);
-          formData.set("productImage", img);
-          await axios.put(`${Url}${endPoint}${value.id}`, formData);
-        }
-        if (formType == "categories") {
-          await axios.put(`${Url}${endPoint}${value.id}`, values);
-        }
-        Edit(titlePopConfirm);
-        handleOk();
-      } catch (error) {
-        Error("El nombre debe de ser unico");
-        console.log(error);
-      }
-    }
-  };
-  const GuardarImg = (info) => {
-    setImg(info.file);
-  };
 
   const onOk = async () => {
-    form.validateFields().then((values) => {
-      Guardar(values);
-    });
-  };
-  useEffect(() => {
-    if (value == null) {
-      form.resetFields();
-    } else {
-      console.log(value.productImage)
-      setImg(value.productImage);
-      form.resetFields();
-      form.setFieldValue(value);
+    if(datos.formType == "formCategories"){
+      modalType == 'post'?
+      await axios.post(url + endPoint, auxData.name ):
+      await axios.put(url + endPoint, auxData.name )
     }
-  }, [isOpenModal]);
+    if(datos.formType == "formSubCategory"){
+      const elementCategory = {
+        name: auxData.name,
+        category: auxData.category,
+      };
+      modalType == 'post'?
+      await axios.post(url + endPoint, elementCategory ):
+      await axios.put(url + endPoint, elementCategory )
+    }
+    if(datos.formType == "formPrice"){
+      const elementPrice= {
+        price: auxData.price,
+        producto: auxData.category,
+      };
+      modalType == 'post'?
+      await axios.post(url + endPoint, elementPrice ):
+      await axios.put(url + endPoint, elementPrice )
+    }
+
+    if (
+      datos.formType == "formProducts" ||
+      datos.formType == "formProductsCategory"
+    ) {
+      const formData = new FormData();
+      formData.set("name", auxData.name);
+      formData.set("description", auxData.description);
+      formData.set("stock", auxData.stock);
+      formData.set(
+        "category",
+        router.query.id ? router.query.id : auxData.category
+      );
+
+      modalType == "post"
+        ? (formData.set("productImage", auxData.productImage),
+          await axios.post(url + endPoint, formData))
+        : auxData.productImage == "nada"
+        ? await axios.put(url + endPoint, formData)
+        : (formData.set("productImage", auxData.productImage),
+          await axios.put(url + endPoint, formData));
+    }
+    dispatch(changeOpenModal(false));
+    dispatch(changeActualizar(!actualizar));
+  };
 
   return (
     <Modal
-      title={titleModal}
-      open={isOpenModal}
+      centered
+      title={datos.titleModal}
+      open={datos.openModal}
       onOk={onOk}
-      onCancel={handleCancel}
+      onCancel={() => dispatch(changeOpenModal(false))}
+      width={datos.formType == "formProducts" ? 700 : 500}
     >
-      {formType == "products" ? (
-        <FormProducts formData={GuardarImg} data={{ ...value }} form={form} />
-      ) : formType == "categories" ? (
-        <FormCategorie data={{ ...value }} form={form} />
-      ) : (
-        ""
-      )}
+      <FormGlobal />
     </Modal>
   );
 };
 
-export default modal;
+export default ModalGlobal;

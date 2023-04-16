@@ -1,14 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
-import Data from "./features/Data/Data";
+import Data from "./features/Data/LoadData";
 import ItemsNav from "./features/Data/itemsNav";
 import dataExtra from "./features/Data/dataExtra";
-import dateSteps from "./features/Data/dateSteps";
+import editData from "./features/Data/editData";
+import formData from "./features/Data/formData";
 export const store = configureStore({
   reducer: {
     items: ItemsNav,
     load: Data,
     extra: dataExtra,
-    steps: dateSteps
+    edit: editData,
+    form: formData
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

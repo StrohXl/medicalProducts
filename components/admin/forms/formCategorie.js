@@ -1,5 +1,34 @@
 import { Form, Input } from "antd";
-const formCategorie = ({ form, data, onChange}) => {
+import { useSelector,useDispatch } from "react-redux";
+import { useState,useEffect } from "react";
+import { changeformDateName } from "<negocio>/src/app/features/Data/formData";
+const formCategorie = ({ }) => {
+  const dispatch = useDispatch()
+  const auxData = useSelector(state=>state.edit.value)
+  const dataExtra = useSelector(state=>state.extra)
+  const [data, setData] = useState([])
+  const [form] = Form.useForm()
+  const onChange=(e)=>{
+    setData(e)
+    dispatch(changeformDateName(e))
+  }
+  useEffect(()=>{
+    dispatch(changeformDateName(auxData.name))
+    if(dataExtra.openModal == true){
+      if(dataExtra.modalType == 'put'){
+        setData({...auxData})
+        form.setFieldsValue({...auxData})
+      }
+      else{
+        form.resetFields()
+        setData('')
+      }
+    }
+    else{
+      form.resetFields()
+      setData('')
+    }
+  },[auxData, dataExtra])
   return (
     <Form
       layout="vertical"

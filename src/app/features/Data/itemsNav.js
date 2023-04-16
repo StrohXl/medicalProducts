@@ -14,7 +14,9 @@ export const loadItemsData = createAsyncThunk('data/itemsNav', async(state, acti
     const { data } = await axios.get(`${url}${state}`);
     data.map(i=> i.key = i.id)
     data.map(i=> i.label = <Link href={`/medicamentos/${i.name}?value=${i.key}`}>{i.name}</Link>)
-    return data
+    const filter = data.filter((i,index)=>index < 5)
+    filter.push({key: 'verMas', label: <Link href={`/medicamentos/`}>Ver Mas</Link>})
+    return filter
 })
 const initialState = [
     {
@@ -55,13 +57,9 @@ export const itemsNav = createSlice({
   name: "items",
   initialState,
   reducers: {
-    loadItems:()=>{
-        console.log('chupalo')
-    }
   },
   extraReducers: builder => {
     builder.addCase(loadItemsData.pending, (state, actions)=>{
-        console.log('cargando')
     }).addCase(loadItemsData.fulfilled, (state,actions)=>{
         state[0].children = actions.payload
     })
