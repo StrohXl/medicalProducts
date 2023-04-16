@@ -12,6 +12,7 @@ import {
   changeActualizar,
   changeFormType,
   changeLabelName,
+  changeMessageNotification,
   changeModalType,
   changeOpenModal,
   changeTitleModal,
@@ -50,6 +51,7 @@ const index = () => {
   };
 
   const LoadData = async () => {
+    dispatch(changeMessageNotification('el Producto'))
     dispatch(changeLabelName('Nombre del Producto'))
     dispatch(loadData({endPoint: '/products/', value: id}))
     const dataCategory = await axios.get('http://localhost:8000/api/categories')

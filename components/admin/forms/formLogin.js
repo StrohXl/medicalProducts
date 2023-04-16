@@ -14,8 +14,7 @@ const formLogin = () => {
       const {
         data: { token },
       } = await axios.post("http://localhost:8000/api/login", form);
-      axios.defaults.headers.common = { Authorization: `Bearer ${token}` };
-      Cookies.set("token", token);
+      Cookies.set('token', token)
       router.push("/admin");
     } catch (error) {
       error.response.status == 400?

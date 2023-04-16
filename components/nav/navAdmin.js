@@ -2,13 +2,16 @@ import React from "react";
 import { Typography, theme, Row, Col, Dropdown, Button } from "antd";
 import { mdiAccount, mdiLogout } from "@mdi/js";
 import Icon from "@mdi/react";
-import { Avatar } from "antd";
-import { Space } from "antd";
+import Cookies from "js-cookie";
 import Link from "next/link";
+import axios from "axios";
 
 const { Title } = Typography;
 
 const Nav = () => {
+  const Salir=()=>{
+    Cookies.remove('token')
+  }
   const items = [
     {
       key: 1,
@@ -21,7 +24,7 @@ const Nav = () => {
     {
       key: 3,
       label: (
-        <Link href={'/login'}>
+        <Link href={'/login'} onClick={()=>Salir()}>
             Salir 
         </Link>
       ),

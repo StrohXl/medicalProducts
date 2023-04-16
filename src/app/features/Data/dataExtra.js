@@ -4,7 +4,7 @@ const initialState = {
   modalType: "",
   openModal: false,
   titleModal: "",
-  popConfirm: "",
+  messageNotification: "",
   endPoint: '',
   actualizar: false,
   placeholderInput: "",
@@ -28,8 +28,8 @@ export const dataExtra = createSlice({
     changeTitleModal: (state, actions) => {
       state.titleModal = actions.payload;
     },
-    changePopConfirm: (state, actions) => {
-      state.popConfirm = actions.payload;
+    changeMessageNotification: (state, actions) => {
+      state.messageNotification = actions.payload;
     },
     changeEndPoint: (state, actions) => {
       state.endPoint = actions.payload;
@@ -49,7 +49,7 @@ export const {
   changeEndPoint,
   changeFormType,
   changeOpenModal,
-  changePopConfirm,
+  changeMessageNotification,
   changeModalType,
   changeTitleModal,
 } = dataExtra.actions;

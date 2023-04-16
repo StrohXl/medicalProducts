@@ -9,6 +9,7 @@ import {
   changeFormType,
   changeModalType,
   changeLabelName,
+  changeMessageNotification,
 } from "<negocio>/src/app/features/Data/dataExtra";
 import { loadEditData } from "<negocio>/src/app/features/Data/editData";
 import { useSelector, useDispatch } from "react-redux";
@@ -30,6 +31,7 @@ const Categorie = () => {
   const LoadData = () => {
     dispatch(changeLabelName('Nombre de la Sub Categoria'))
     dispatch(loadData({ endPoint: '/sub_categories/' }));
+    dispatch(changeMessageNotification('la SubCategoria'))
   };
   useEffect(() => {
     LoadData();

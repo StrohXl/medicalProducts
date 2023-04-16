@@ -10,6 +10,8 @@ import {
   changeFormType,
   changeModalType,
   changeTitleModal,
+  changeLabelName,
+  changeMessageNotification
 } from "<negocio>/src/app/features/Data/dataExtra";
 import { loadEditData } from "<negocio>/src/app/features/Data/editData";
 import { loadData } from "<negocio>/src/app/features/Data/LoadData";
@@ -26,9 +28,11 @@ const Categorie = () => {
   const dispatch = useDispatch();
   const LoadData = async () => {
     dispatch(loadData({endPoint: '/categories'}))
+    dispatch(changeMessageNotification('la Categoria'))
   };
 
   const openModal = () => {
+    dispatch(changeLabelName('Nombre de la Categoria'))
     dispatch(changeOpenModal(true))
     dispatch(changeTitleModal('Agregar Categoria'))
     dispatch(changeFormType('formCategories'))

@@ -12,6 +12,7 @@ import {
   changeModalType,
   changeEndPoint,
   changeLabelName,
+  changeMessageNotification,
 } from "<negocio>/src/app/features/Data/dataExtra";
 import ModalForm from "<negocio>/components/admin/modal";
 
@@ -24,6 +25,7 @@ const index = () => {
 
   // FUNCIONES
   const LoadData = async () => {
+    dispatch(changeMessageNotification('el Producto'))
     dispatch(changeEndPoint("/products/"));
     dispatch(loadData({ endPoint: "/products/" }));
     dispatch(changeLabelName("Nombre del Producto"));

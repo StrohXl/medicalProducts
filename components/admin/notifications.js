@@ -1,13 +1,8 @@
 import { notification } from "antd"
-
-export const Create=(message)=>{
+export const Completado=(modalType, message)=>{
+    console.log(modalType)
     notification.success({
-        message: `Se ha creado con exito ${message}`
-    })
-}
-export const Edit=(edit)=>{
-    notification.success({
-        message: `Se ha editado con exito ${edit}`
+        message: `Se ha${modalType == 'post'? ' creado ': ' editado '}con exito ${message}`
     })
 }
 export const Error=(error)=>{

@@ -5,6 +5,7 @@ import LayoutAdmin from "<negocio>/components/admin/layoutAdmin";
 import LayoutClient from "<negocio>/components/client/layout";
 import { Provider } from "react-redux";
 import { store } from "<negocio>/src/app/store";
+import '../components/admin/axiosConfig'
 export default function App({ Component, pageProps }) {
   const router = useRouter();
 
