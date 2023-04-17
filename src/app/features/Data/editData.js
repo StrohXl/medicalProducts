@@ -5,6 +5,7 @@ export const loadEditData = createAsyncThunk(
   "data/editData",
   async (state, actions) => {
     const { data } = await axios.get(`${url}${state}`);
+    console.log(data)
     return data;
   }
 );

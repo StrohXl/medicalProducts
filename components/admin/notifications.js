@@ -1,6 +1,5 @@
 import { notification } from "antd"
 export const Completado=(modalType, message)=>{
-    console.log(modalType)
     notification.success({
         message: `Se ha${modalType == 'post'? ' creado ': ' editado '}con exito ${message}`
     })

@@ -27,11 +27,6 @@ const menuSiderAdmin = () => {
       key: '/admin/products',
       icon: <Icon size={1}  path={mdiMedicationOutline}  />
     },
-    {
-      label: 'Lista de Precios',
-      key: '/admin/listPrice',
-      icon: <Icon path={mdiCurrencyUsd} size={1} />
-    }
   ]
   return (
     <Menu

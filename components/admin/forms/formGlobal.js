@@ -9,7 +9,7 @@ import {
   changeformDateDescription,
   changeformDateName,
   changeformDateStock,
-  changeformDatePrice
+  changeformDatePrice,
 } from "<negocio>/src/app/features/Data/formData";
 import { useDispatch } from "react-redux";
 import { Avatar } from "antd";
@@ -34,7 +34,7 @@ const formProducts = () => {
     dispatch(changeformDateName(allValues.name));
     dispatch(changeformDateDescription(allValues.description));
     dispatch(changeformDateStock(allValues.stock));
-    dispatch(changeformDatePrice(allValues.price))
+    dispatch(changeformDatePrice(allValues.price));
     setData(allValues);
   };
   const loadDataTable = async () => {
@@ -56,9 +56,13 @@ const formProducts = () => {
         dispatch(changeformDateName(editData.value.name));
         dispatch(changeformDateDescription(editData.value.description));
         dispatch(changeformDateStock(editData.value.stock));
+        dispatch(changeformDatePrice(''));
         formType == "formSubCategory"
           ? dispatch(changeformDateCategory(editData.value.category))
           : dispatch(changeformDateCategory(idCategory?.id));
+        editData.value.precio == null
+          ? ""
+          : form.setFieldValue("price", editData.value.precio.price);
         form.setFieldsValue({ ...editData.value });
         setData({ ...editData.value });
       }
@@ -79,27 +83,29 @@ const formProducts = () => {
     >
       <Space
         align="start"
-        direction={formType == "formSubCategory" || formType == "formPrice" ? "vertical" : "horizontal"}
+        direction={
+          formType == "formSubCategory" || formType == "formPrice"
+            ? "vertical"
+            : "horizontal"
+        }
       >
         <div style={{ width: formType == "formProducts" ? "300px" : "450px" }}>
-          {formType == "formPrice" ? (
-            <Form.Item label={"Precio del Producto"} name="price">
-              <InputNumber style={{width: '50%'}}  min={1}/>
-            </Form.Item>
-          ) : (
-            <Form.Item name="name" label={dataExtra.labelName}>
-              <Input />
-            </Form.Item>
-          )}
-
+          <Form.Item name="name" label={dataExtra.labelName}>
+            <Input />
+          </Form.Item>
           {formType == "formProducts" || formType == "formProductsCategory" ? (
             <>
               <Form.Item name="description" label="Descripcion del Producto">
                 <Input.TextArea />
               </Form.Item>
+
               <Form.Item name="stock" label="Productos existentes">
                 <InputNumber min={1} max={10000} />
               </Form.Item>
+              <Form.Item name="price" label="Precio del Producto">
+                <InputNumber min={1} max={10000} />
+              </Form.Item>
+
               <Form.Item label="Seleccione una Imagen">
                 <Upload />
               </Form.Item>
@@ -109,16 +115,8 @@ const formProducts = () => {
           )}
         </div>
 
-        {formType == "formProducts" ||
-        formType == "formSubCategory" ||
-        formType == "formPrice" ? (
-          <Form.Item
-            label={
-              formType == "formPrice"
-                ? "Seleccione un Producto"
-                : "Seleccione una Categoria"
-            }
-          >
+        {formType == "formProducts" || formType == "formSubCategory" ? (
+          <Form.Item label="Seleccione una Categoria">
             {dataExtra.modalType == "post" ? (
               ""
             ) : (
@@ -127,21 +125,7 @@ const formProducts = () => {
             <Table
               style={{ width: formType == "formProducts" ? "300px" : "450px" }}
               dataSource={dataTable}
-              columns={[
-                formType == "formPrice" ?
-                {
-                  key: "avatar",
-                  title: "",
-                  dataIndex: "productImage",
-                  width: 100,
-                  render: (data, record) => (
-                    <Avatar src={`http://localhost:8000${data}`} size={60} />
-                  ),
-                }
-                :
-                {},
-                { key:'name', title: "Categoria", dataIndex: "name" }
-              ]}
+              columns={[{ key: "name", title: "Categoria", dataIndex: "name" }]}
               rowSelection={{ type: "radio", ...rowSelection }}
               pagination={{ pageSize: 4 }}
             />

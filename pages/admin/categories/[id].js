@@ -30,6 +30,7 @@ const index = () => {
   const actualizar = useSelector(state=>state.extra.actualizar)
   // RUTAS
   const [endPoint, setEndPoint] = useState();
+  const [idProduct, setIdProduct] = useState('')
 
   // VARIABLES DE ESTADO
 
@@ -42,6 +43,7 @@ const index = () => {
     setEndPoint('/products/')
   };
   const openModalEdit = (id) => {
+    setIdProduct(id)
     setEndPoint('/products/'+id)
     dispatch(changeOpenModal(true))
     dispatch(changeTitleModal('Editar Producto'))
@@ -87,9 +89,15 @@ const index = () => {
       dataIndex: "stock",
     },
     {
-      key: "price",
+      key: "category",
+      title: "Categoria",
+      dataIndex: "category",
+    },
+    {
+      key: "precio",
       title: "Precio del Producto",
-      dataIndex: "price",
+      dataIndex: "precio",
+      render:(data,record)=>(<p>{data == null? 'No tiene precio': data.price}</p>)
     },
     {
       title: "Acciones",
@@ -116,7 +124,7 @@ const index = () => {
       />
       <Divider />
       <Table dataSource={data} columns={columns} />
-      <ModalForm endPoint={endPoint}/>
+      <ModalForm endPoint={endPoint} id={idProduct}/>
     </>
   );
 };

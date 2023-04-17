@@ -22,6 +22,7 @@ const index = () => {
   const datos = useSelector((state) => state.load.value);
   const actualizar = useSelector((state) => state.extra.actualizar);
   const [endPoint, setEndPoint] = useState("");
+  const [id, setId] = useState('')
 
   // FUNCIONES
   const LoadData = async () => {
@@ -38,6 +39,7 @@ const index = () => {
     setEndPoint(`/products/`);
   };
   const openModalEdit = (id) => {
+    setId(id)
     setEndPoint(`/products/${id}`);
     dispatch(changeOpenModal(true));
     dispatch(changeModalType("put"));
@@ -74,9 +76,15 @@ const index = () => {
       dataIndex: "stock",
     },
     {
+      key: "category",
+      title: "Categoria",
+      dataIndex: "category",
+    },
+    {
       key: "price",
       title: "Precio del Producto",
       dataIndex: "precio",
+      render:(data,record)=>(<p>{data == null? 'No tiene precio': data.price}</p>)
     },
     {
       title: "Acciones",
@@ -100,7 +108,7 @@ const index = () => {
       />
       <Divider />
       <Table dataSource={datos} columns={columns} />
-      <ModalForm endPoint={endPoint} />
+      <ModalForm endPoint={endPoint} id={id} />
     </>
   );
 };
