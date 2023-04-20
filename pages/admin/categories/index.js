@@ -29,13 +29,13 @@ const Categorie = () => {
   const LoadData = async () => {
     dispatch(loadData({endPoint: '/categories'}))
     dispatch(changeMessageNotification('la Categoria'))
+    dispatch(changeFormType('formCategories'))
   };
 
   const openModal = () => {
     dispatch(changeLabelName('Nombre de la Categoria'))
     dispatch(changeOpenModal(true))
     dispatch(changeTitleModal('Agregar Categoria'))
-    dispatch(changeFormType('formCategories'))
     dispatch(changeModalType('post'))
     setEndPoint("/categories/");
   };
@@ -43,7 +43,6 @@ const Categorie = () => {
     dispatch(loadEditData("/categories/" + id))
     dispatch(changeOpenModal(true))
     dispatch(changeTitleModal('Editar Categoria'))
-    dispatch(changeFormType('formCategories'))
     dispatch(changeModalType('put'))
     setEndPoint("/categories/" + id);
   };

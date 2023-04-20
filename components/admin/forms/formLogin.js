@@ -15,7 +15,7 @@ const formLogin = () => {
         data: { token },
       } = await axios.post("http://localhost:8000/api/login", form);
       Cookies.set('token', token)
-      router.push("/admin");
+      location.href = "/admin"
     } catch (error) {
       error.response.status == 400?
       Error(error.response.data.msg):

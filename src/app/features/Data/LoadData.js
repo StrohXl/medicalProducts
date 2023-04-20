@@ -10,6 +10,7 @@ export const loadData = createAsyncThunk(
         search: state.search,
       },
     });
+    data.map(i=>i.key = i.id)
     return data;
   }
 );

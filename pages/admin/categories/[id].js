@@ -20,6 +20,7 @@ import {
 import { loadData } from "<negocio>/src/app/features/Data/LoadData";
 import { loadEditData } from "<negocio>/src/app/features/Data/editData";
 import ModalForm from "<negocio>/components/admin/modal";
+import { changeformDateCategory, changeformDateDescription, changeformDateName, changeformDatePrice, changeformDateStock } from "<negocio>/src/app/features/Data/formData";
 const index = () => {
   // VARIABLES
   const dispatch = useDispatch()
@@ -27,6 +28,7 @@ const index = () => {
   const router = useRouter();
   const id = router.query.id;
   const data = useSelector(state=>state.load.value)
+  console.log(data)
   const actualizar = useSelector(state=>state.extra.actualizar)
   // RUTAS
   const [endPoint, setEndPoint] = useState();
@@ -79,11 +81,6 @@ const index = () => {
       dataIndex: "name",
     },
     {
-      key: "description",
-      title: "Descripcion del Producto",
-      dataIndex: "description",
-    },
-    {
       key: "stock",
       title: "Existentes",
       dataIndex: "stock",
@@ -97,7 +94,7 @@ const index = () => {
       key: "precio",
       title: "Precio del Producto",
       dataIndex: "precio",
-      render:(data,record)=>(<p>{data == null? 'No tiene precio': data.price}</p>)
+      render:(data,record)=>(<p style={{paddingTop: '15px'}}>{data == null? 'No tiene precio': data.price}</p>)
     },
     {
       title: "Acciones",
@@ -123,7 +120,11 @@ const index = () => {
         showInputSearch={true}
       />
       <Divider />
-      <Table dataSource={data} columns={columns} />
+      <Table dataSource={data} columns={columns} expandable={{expandedRowRender:(record)=>(
+        <p>
+          {record.description}
+        </p>
+      )}} />
       <ModalForm endPoint={endPoint} id={idProduct}/>
     </>
   );

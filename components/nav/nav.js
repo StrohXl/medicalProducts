@@ -37,7 +37,7 @@ const Nav = () => {
             position: "absolute",
           }}
         >
-          <a href={"/login"}>
+          <Link href={"/login"}>
             <Tooltip
               title="Ingresar"
               arrow={false}
@@ -50,7 +50,7 @@ const Nav = () => {
                 icon={<UserOutlined />}
               />
             </Tooltip>
-          </a>
+          </Link>
         </Col>
         <Col
           md={0}

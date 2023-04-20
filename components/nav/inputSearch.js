@@ -9,7 +9,7 @@ const inputSearch = ({ placeholder, onSearch }) => {
   const router = useRouter()
   const dispatch = useDispatch();
   const onChange=(value)=>{
-    dispatch(loadData({endPoint: '/products/', search: value.target.value, value: router.query.id? router.query.id: ''}))
+    dispatch(loadData({endPoint: '/products/', search: value.target.value, value: router.query.id? router.query.id: null}))
   }
   return (
     <ConfigProvider

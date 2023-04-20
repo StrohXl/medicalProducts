@@ -15,18 +15,17 @@ import {
   changeMessageNotification,
 } from "<negocio>/src/app/features/Data/dataExtra";
 import ModalForm from "<negocio>/components/admin/modal";
-
 const index = () => {
   // VARIABLES
   const dispatch = useDispatch();
   const datos = useSelector((state) => state.load.value);
   const actualizar = useSelector((state) => state.extra.actualizar);
   const [endPoint, setEndPoint] = useState("");
-  const [id, setId] = useState('')
+  const [id, setId] = useState("");
 
   // FUNCIONES
   const LoadData = async () => {
-    dispatch(changeMessageNotification('el Producto'))
+    dispatch(changeMessageNotification("el Producto"));
     dispatch(changeEndPoint("/products/"));
     dispatch(loadData({ endPoint: "/products/" }));
     dispatch(changeLabelName("Nombre del Producto"));
@@ -39,7 +38,7 @@ const index = () => {
     setEndPoint(`/products/`);
   };
   const openModalEdit = (id) => {
-    setId(id)
+    setId(id);
     setEndPoint(`/products/${id}`);
     dispatch(changeOpenModal(true));
     dispatch(changeModalType("put"));
@@ -66,11 +65,6 @@ const index = () => {
       dataIndex: "name",
     },
     {
-      key: "description",
-      title: "Descripcion del Producto",
-      dataIndex: "description",
-    },
-    {
       key: "stock",
       title: "Existentes",
       dataIndex: "stock",
@@ -84,7 +78,9 @@ const index = () => {
       key: "price",
       title: "Precio del Producto",
       dataIndex: "precio",
-      render:(data,record)=>(<p>{data == null? 'No tiene precio': data.price}</p>)
+      render: (data, record) => (
+        <p style={{paddingTop: '15px'}}>{data == null ? "No tiene precio" : data.price}</p>
+      ),
     },
     {
       title: "Acciones",
@@ -107,7 +103,13 @@ const index = () => {
         showInputSearch={true}
       />
       <Divider />
-      <Table dataSource={datos} columns={columns} />
+      <Table
+        dataSource={datos}
+        columns={columns}
+        expandable={{
+          expandedRowRender: (record) => <p>{record.description}</p>,
+        }}
+      />
       <ModalForm endPoint={endPoint} id={id} />
     </>
   );

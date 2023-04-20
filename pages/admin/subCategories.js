@@ -18,20 +18,18 @@ import TitleAndAccion from "<negocio>/components/admin/titleAndAccion";
 import ModalForm from "<negocio>/components/admin/modal";
 const Categorie = () => {
   // VARIABLES DE ESTADO
-  const [endPoint, setEndPoint] = useState('')
+  const [endPoint, setEndPoint] = useState("");
   const data = useSelector((state) => state.load.value);
   const dispatch = useDispatch();
 
-
   //SELECTORES
- const actualizar = useSelector(state=>state.extra.actualizar)
-
+  const actualizar = useSelector((state) => state.extra.actualizar);
 
   // FUNCIONES
   const LoadData = () => {
-    dispatch(changeLabelName('Nombre de la Sub Categoria'))
-    dispatch(loadData({ endPoint: '/sub_categories/' }));
-    dispatch(changeMessageNotification('la SubCategoria'))
+    dispatch(changeLabelName("Nombre de la Sub Categoria"));
+    dispatch(loadData({ endPoint: "/sub_categories/" }));
+    dispatch(changeMessageNotification("la SubCategoria"));
   };
   useEffect(() => {
     LoadData();
@@ -45,12 +43,12 @@ const Categorie = () => {
     setEndPoint(`/sub_categories/`);
   };
   const openModalEdit = (id) => {
+    dispatch(changeFormType("formSubCategory"));
     dispatch(changeOpenModal(true));
     dispatch(changeTitleModal("Editar SubCategoria"));
-    dispatch(changeFormType("formSubCategory"));
     dispatch(changeModalType("put"));
-    dispatch(loadEditData(`/sub_categories/`+id))
-    setEndPoint(`/sub_categories/`+id);
+    dispatch(loadEditData(`/sub_categories/` + id));
+    setEndPoint(`/sub_categories/` + id);
   };
   // COLUMNAS DE LA TABLA
   const columns = [
